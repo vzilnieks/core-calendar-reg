@@ -1,3 +1,30 @@
-<p>
-  dashboard works!
-</p>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="Day1">
+      <mat-header-cell *matHeaderCellDef>{{ weekDay[1] }}</mat-header-cell>
+      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Day2">
+      <mat-header-cell *matHeaderCellDef>{{ weekDay[2] }}</mat-header-cell>
+      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Day3">
+      <mat-header-cell *matHeaderCellDef>{{ weekDay[3] }}</mat-header-cell>
+      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Day4">
+      <mat-header-cell *matHeaderCellDef>{{ weekDay[4] }}</mat-header-cell>
+      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Day5">
+      <mat-header-cell *matHeaderCellDef>{{ weekDay[5] }}</mat-header-cell>
+      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Day6">
+      <mat-header-cell *matHeaderCellDef>{{ weekDay[6] }}</mat-header-cell>
+      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let myRowData; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
