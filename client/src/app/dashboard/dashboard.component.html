@@ -1,30 +1,47 @@
 <div class="mat-elevation-z8">
-  <mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="Day1">
-      <mat-header-cell *matHeaderCellDef>{{ weekDay[1] }}</mat-header-cell>
-      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Day2">
-      <mat-header-cell *matHeaderCellDef>{{ weekDay[2] }}</mat-header-cell>
-      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Day3">
-      <mat-header-cell *matHeaderCellDef>{{ weekDay[3] }}</mat-header-cell>
-      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Day4">
-      <mat-header-cell *matHeaderCellDef>{{ weekDay[4] }}</mat-header-cell>
-      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Day5">
-      <mat-header-cell *matHeaderCellDef>{{ weekDay[5] }}</mat-header-cell>
-      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="Day6">
-      <mat-header-cell *matHeaderCellDef>{{ weekDay[6] }}</mat-header-cell>
-      <mat-cell *matCellDef="let time">{{ time.master }}</mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let myRowData; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  <!-- <mat&#45;card> -->
+    <mat-grid-list cols="6">
+      <mat-grid-tile *ngFor="let day of weekDays; let i = index">
+	<mat-card class="day-card">
+	  <mat-card-header>
+	    <mat-card-title>
+	      {{ day }}
+	    </mat-card-title>
+	  </mat-card-header>
+	  <mat-card-content class="day-card">
+	    {{ getMasters(i) }} 
+	    Amet perferendis eum nam sit est ad aperiam Laboriosam soluta quaerat illo tempore autem pariatur, ex molestiae, odit? Impedit laudantium
+	  </mat-card-content>
+	</mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  <!-- </mat&#45;card> -->
+  <!-- <mat&#45;table [dataSource]="dataSource"> -->
+  <!--   <ng&#45;container matColumnDef="Day1"> -->
+  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[1] }}</mat&#45;header&#45;cell> -->
+  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
+  <!--   </ng&#45;container> -->
+  <!--   <ng&#45;container matColumnDef="Day2"> -->
+  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[2] }}</mat&#45;header&#45;cell> -->
+  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
+  <!--   </ng&#45;container> -->
+  <!--   <ng&#45;container matColumnDef="Day3"> -->
+  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[3] }}</mat&#45;header&#45;cell> -->
+  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
+  <!--   </ng&#45;container> -->
+  <!--   <ng&#45;container matColumnDef="Day4"> -->
+  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[4] }}</mat&#45;header&#45;cell> -->
+  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
+  <!--   </ng&#45;container> -->
+  <!--   <ng&#45;container matColumnDef="Day5"> -->
+  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[5] }}</mat&#45;header&#45;cell> -->
+  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
+  <!--   </ng&#45;container> -->
+  <!--   <ng&#45;container matColumnDef="Day6"> -->
+  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[6] }}</mat&#45;header&#45;cell> -->
+  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
+  <!--   </ng&#45;container> -->
+  <!--   <mat&#45;header&#45;row *matHeaderRowDef="displayedColumns"></mat&#45;header&#45;row> -->
+  <!--   <mat&#45;row *matRowDef="let myRowData; columns: displayedColumns;"></mat&#45;row> -->
+  <!-- </mat&#45;table> -->
 </div>
