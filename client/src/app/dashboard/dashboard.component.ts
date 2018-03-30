@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog} from '@angular/material';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 // export interface Time {
 //   dayOfWeek: number,
@@ -7,7 +8,6 @@ import {MatTableDataSource} from '@angular/material';
 //   master: string;
 //   free: boolean;
 // }
-//
 //
 // const ELEMENT_DATA: Time[] = [
 //   {dayOfWeek: 1, time: 1, master: 'Master1', free: true},
@@ -18,7 +18,6 @@ import {MatTableDataSource} from '@angular/material';
 //   {dayOfWeek: 1, time: 6, master: 'Master1', free: true},
 //   {dayOfWeek: 2, time: 7, master: 'Master1', free: true}
 // ];
-
 
 @Component({
   selector: 'app-dashboard',
@@ -35,13 +34,17 @@ export class DashboardComponent implements OnInit {
   //dataSource = ELEMENT_DATA;
   // dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
   public getMasters(i: number) {
     return null;
+  }
+
+  public openDialog(i: number) {
+    this.dialog.open(ModalComponent, {data: {alert: this.weekDays[i]}});
   }
 
 }

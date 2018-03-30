@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { ModalComponent } from './shared/modal/modal.component';
 
 // TODO: component refactoring
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,6 +22,7 @@ import { AuthComponent } from './auth/auth.component';
     DashboardFilterComponent,
     AdminComponent,
     AuthComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { AuthComponent } from './auth/auth.component';
     SharedModule
   ],
   providers: [],
+  entryComponents: [ModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
