@@ -1,46 +1,24 @@
-<div class="mat-elevation-z8">
-  <mat-grid-list cols="6">
-    <mat-grid-tile *ngFor="let day of weekDays; let i = index">
-      <mat-card class="day-card">
-	<mat-card-header>
-	  <mat-card-title>
-	    <p (click)="openDialog(i)">{{ day }}</p>
-	  </mat-card-title>
-	</mat-card-header>
-	<mat-card-content class="day-card">
-	  {{ getMasters(i) }} 
-	  Amet perferendis eum nam sit est ad aperiam Laboriosam soluta quaerat illo tempore autem pariatur, ex molestiae, odit? Impedit laudantium
-	</mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <!-- <mat&#45;table [dataSource]="dataSource"> -->
-  <!--   <ng&#45;container matColumnDef="Day1"> -->
-  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[1] }}</mat&#45;header&#45;cell> -->
-  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
-  <!--   </ng&#45;container> -->
-  <!--   <ng&#45;container matColumnDef="Day2"> -->
-  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[2] }}</mat&#45;header&#45;cell> -->
-  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
-  <!--   </ng&#45;container> -->
-  <!--   <ng&#45;container matColumnDef="Day3"> -->
-  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[3] }}</mat&#45;header&#45;cell> -->
-  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
-  <!--   </ng&#45;container> -->
-  <!--   <ng&#45;container matColumnDef="Day4"> -->
-  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[4] }}</mat&#45;header&#45;cell> -->
-  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
-  <!--   </ng&#45;container> -->
-  <!--   <ng&#45;container matColumnDef="Day5"> -->
-  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[5] }}</mat&#45;header&#45;cell> -->
-  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
-  <!--   </ng&#45;container> -->
-  <!--   <ng&#45;container matColumnDef="Day6"> -->
-  <!--     <mat&#45;header&#45;cell *matHeaderCellDef>{{ weekDay[6] }}</mat&#45;header&#45;cell> -->
-  <!--     <mat&#45;cell *matCellDef="let time">{{ time.master }}</mat&#45;cell> -->
-  <!--   </ng&#45;container> -->
-  <!--   <mat&#45;header&#45;row *matHeaderRowDef="displayedColumns"></mat&#45;header&#45;row> -->
-  <!--   <mat&#45;row *matRowDef="let myRowData; columns: displayedColumns;"></mat&#45;row> -->
-  <!-- </mat&#45;table> -->
-</div>
+<mat-grid-list cols="3" rowHeight="400px">
+  <mat-grid-tile *ngFor="let day of weekDays; let i = index">
+    <mat-card class="mat-elevation-z8 day-card">
+      <mat-card-header>
+	<mat-card-title>
+	  <p>{{ day }}</p>
+	</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="day-card">
+	<mat-list role="list">
+	  <mat-list-item class="masters-line">{{getMasters(i)}}</mat-list-item>
+	  <mat-divider></mat-divider>
+	  <mat-list-item 
+	    class="time-line" 
+	    role="listitem" 
+	    *ngFor="let hour of workHours; let hourId = index"
+	    (click)="openDialog(i,hourId)">
+	      {{hour}}<p>Order</p>
+	  </mat-list-item>
+	</mat-list>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

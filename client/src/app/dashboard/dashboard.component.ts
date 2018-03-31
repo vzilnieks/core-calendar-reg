@@ -1,23 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material';
-import { ModalComponent } from '../shared/modal/modal.component';
+import { MatDialog } from '@angular/material';
+import { ModalComponent } from '../shared/components/modal/modal.component';
+import { Master } from '../shared/classes/master';
 
-// export interface Time {
-//   dayOfWeek: number,
-//   time: number;
-//   master: string;
-//   free: boolean;
-// }
-//
-// const ELEMENT_DATA: Time[] = [
-//   {dayOfWeek: 1, time: 1, master: 'Master1', free: true},
-//   {dayOfWeek: 1, time: 2, master: 'Master2', free: true},
-//   {dayOfWeek: 1, time: 3, master: 'Master1', free: true},
-//   {dayOfWeek: 1, time: 4, master: 'Master1', free: true},
-//   {dayOfWeek: 1, time: 5, master: 'Master1', free: true},
-//   {dayOfWeek: 1, time: 6, master: 'Master1', free: true},
-//   {dayOfWeek: 2, time: 7, master: 'Master1', free: true}
-// ];
+// TODO -> DB
+const weekDays = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+const workHours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+
+const masters: Master[] = [
+  {id: 1, name: "John Smith", workingDays: [1, 2]},
+  {id: 2, name: "Andrew Black", workingDays: [2, 3, 6]}
+];
 
 @Component({
   selector: 'app-dashboard',
@@ -26,25 +19,33 @@ import { ModalComponent } from '../shared/modal/modal.component';
 })
 export class DashboardComponent implements OnInit {
 
-  private weekDays = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
-  // private masterList:MasterList[] = [ 
-  //   { name: "masterA" }
-  // ];
-  // displayedColumns = ['Day1', 'Day2', 'Day3', 'Day4', 'Day5', 'Day6' ];
-  //dataSource = ELEMENT_DATA;
-  // dataSource = new MatTableDataSource(ELEMENT_DATA);
+  public weekDays: string[];
+  public workHours: number[];
+  public masters: Master[];
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.weekDays = weekDays;
+    this.workHours = workHours;
+    this.masters = masters;
   }
 
-  public getMasters(i: number) {
-    return null;
+  public getMasters(day: number): string {
+    var workingMasters = [];
+    // TODO: service
+    for ( var master in this.masters) {
+      for ( var workDay in this.masters[master].workingDays ) {
+	if (this.masters[master].workingDays[workDay] == day) {
+	  workingMasters.push(this.masters[master].name);
+	}
+      };
+    };
+    return workingMasters.toString();
   }
 
-  public openDialog(i: number) {
-    this.dialog.open(ModalComponent, {data: {alert: this.weekDays[i]}});
+  public openDialog(day: number, time: number) {
+    this.dialog.open(ModalComponent, {data: {alert: `Order to day: ${this.weekDays[day]}, time: ${this.workHours[time]}` }});
   }
 
 }
