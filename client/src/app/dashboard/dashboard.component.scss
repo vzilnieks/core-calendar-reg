@@ -1,13 +1,24 @@
+.week-grid {
+  max-width: 800px;
+}
+
 .day-card {
-  font-size: 10px;
-  max-width: 120px;
-}
-
-.time-line {
-  font-size: 10px;
-  max-height: 20px;
-}
-
-.masters-line {
   font-size: 12px;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+
+  .day-title {
+    font-weight: bold;
+  }
+
+  .time-line {
+    max-height: 20px;
+    font-size: 10px;
+  }
+
+  .masters-line {
+    font-size: 12px;
+  }
 }
+
