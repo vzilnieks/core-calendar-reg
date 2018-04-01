@@ -1,22 +1,45 @@
-<mat-grid-list cols="3" rowHeight="400px" class="week-grid">
-  <mat-grid-tile *ngFor="let day of weekDays; let i = index">
+<div class="week-container">
+  <div class="week-item" *ngFor="let day of weekDays; let i = index">
     <mat-card class="mat-elevation-z8 day-card">
       <mat-card-header>
-	<mat-card-title class="day-title">{{ day }}</mat-card-title>
+	<mat-card-title class="day-title">
+	  {{ day }}
+	</mat-card-title>
       </mat-card-header>
-      <mat-card-content class="day-card">
-	<mat-list role="list">
-	  <mat-list-item class="masters-line">{{getMasters(i)}}</mat-list-item>
-	  <mat-divider></mat-divider>
-	  <mat-list-item 
-	    class="time-line" 
-	    role="listitem" 
-	    *ngFor="let hour of workHours; let hourId = index"
-	    (click)="openDialog(i,hourId)">
-	      {{hour}}<p>Order</p>
-	  </mat-list-item>
-	</mat-list>
-      </mat-card-content>
+      <mat-list role="list">
+	<mat-list-item class="masters-line">{{getMasters(i)}}</mat-list-item>
+	<mat-divider></mat-divider>
+	<mat-list-item 
+	  class="time-line" 
+	  role="listitem" 
+	  *ngFor="let hour of workHours; let hourId = index"
+	  (click)="openDialog(i,hourId)">
+	    {{hour}}<p>Order</p>
+	</mat-list-item>
+      </mat-list>
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>
+
+<!-- <mat&#45;grid&#45;list cols="3" rowHeight="400px" class="week&#45;grid"> -->
+<!--   <mat&#45;grid&#45;tile *ngFor="let day of weekDays; let i = index"> -->
+<!--     <mat&#45;card class="mat&#45;elevation&#45;z8 day&#45;card"> -->
+<!--       <mat&#45;card&#45;header> -->
+<!-- 	<mat&#45;card&#45;title class="day&#45;title">{{ day }}</mat&#45;card&#45;title> -->
+<!--       </mat&#45;card&#45;header> -->
+<!--       <mat&#45;card&#45;content class="day&#45;card"> -->
+<!-- 	<mat&#45;list role="list"> -->
+<!-- 	  <mat&#45;list&#45;item class="masters&#45;line">{{getMasters(i)}}</mat&#45;list&#45;item> -->
+<!-- 	  <mat&#45;divider></mat&#45;divider> -->
+<!-- 	  <mat&#45;list&#45;item  -->
+<!-- 	    class="time&#45;line"  -->
+<!-- 	    role="listitem"  -->
+<!-- 	    *ngFor="let hour of workHours; let hourId = index" -->
+<!-- 	    (click)="openDialog(i,hourId)"> -->
+<!-- 	      {{hour}}<p>Order</p> -->
+<!-- 	  </mat&#45;list&#45;item> -->
+<!-- 	</mat&#45;list> -->
+<!--       </mat&#45;card&#45;content> -->
+<!--     </mat&#45;card> -->
+<!--   </mat&#45;grid&#45;tile> -->
+<!-- </mat&#45;grid&#45;list> -->

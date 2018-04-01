@@ -1,3 +1,17 @@
+.week-container {
+  display: flex;
+  flex-diretion: row;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.week-item {
+  // margin: auto;
+  padding: 5px;
+}
+
 .week-grid {
   max-width: 800px;
 }
@@ -5,8 +19,8 @@
 .day-card {
   font-size: 12px;
   width: 120px;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
 
   .day-title {
     font-weight: bold;
