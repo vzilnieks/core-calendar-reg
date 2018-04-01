@@ -1,36 +1,19 @@
-<mat-toolbar color="primary"></mat-toolbar>
-<div>
-  <div class="menu-container">
-    <div class="menu-item"><app-dashboard-filter></app-dashboard-filter></div>
-    <div class="menu-item">
-      <mat-accordion>
-	<mat-expansion-panel>
-	  <mat-expansion-panel-header>
-	    <mat-panel-title>
-	      Login to control you orders
-	    </mat-panel-title>
-	  </mat-expansion-panel-header>
-	  <app-auth></app-auth>
-	</mat-expansion-panel>
-      </mat-accordion>
-    </div>
+<mat-toolbar color="primary">Calendar</mat-toolbar>
+<div class="menu-container">
+  <div class="menu-item">
+    <app-dashboard-filter></app-dashboard-filter>
   </div>
-  <!-- <mat&#45;grid&#45;list cols="2" rowHeight="100px"> -->
-  <!--   <mat&#45;grid&#45;tile> -->
-  <!--     <app&#45;dashboard&#45;filter></app&#45;dashboard&#45;filter> -->
-  <!--   </mat&#45;grid&#45;tile> -->
-  <!--   <mat&#45;grid&#45;tile> -->
-  <!--     <mat&#45;accordion> -->
-	<!-- <mat&#45;expansion&#45;panel> -->
-	<!--   <mat&#45;expansion&#45;panel&#45;header> -->
-	<!--     <mat&#45;panel&#45;title> -->
-	<!--       Login to control you orders -->
-	<!--     </mat&#45;panel&#45;title> -->
-	<!--   </mat&#45;expansion&#45;panel&#45;header> -->
-	<!--   <app&#45;auth></app&#45;auth> -->
-	<!-- </mat&#45;expansion&#45;panel> -->
-  <!--     </mat&#45;accordion> -->
-  <!--   </mat&#45;grid&#45;tile> -->
-  <!-- </mat&#45;grid&#45;list> -->
-  <app-dashboard></app-dashboard>
+  <div class="menu-item">
+    <mat-accordion>
+      <mat-expansion-panel>
+	<mat-expansion-panel-header>
+	  <mat-panel-title>
+	    Login to control you orders
+	  </mat-panel-title>
+	</mat-expansion-panel-header>
+	<app-auth></app-auth>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
+<app-dashboard></app-dashboard>

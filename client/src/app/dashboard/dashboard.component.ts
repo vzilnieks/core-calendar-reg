@@ -44,8 +44,19 @@ export class DashboardComponent implements OnInit {
     return workingMasters.toString();
   }
 
-  public openDialog(day: number, time: number) {
-    this.dialog.open(ModalComponent, {data: {alert: `Order to day: ${this.weekDays[day]}, time: ${this.workHours[time]}` }});
+  public openDialog(day: number, time: number, master: number) {
+    this.dialog.open(
+      ModalComponent, 
+      {
+	data: 
+	{
+	  alert: `
+Order to day: ${this.weekDays[day]}, time: ${this.workHours[time]},
+Master: ${this.masters[master].name}
+	  ` 
+	}
+      }
+    );
   }
 
 }

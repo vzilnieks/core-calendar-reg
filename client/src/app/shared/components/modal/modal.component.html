@@ -1,6 +1,15 @@
 <div>
-  <p>
-    {{data.alert}}
-  </p>
-  <button mat-raised-button (click)="closeDialog()">OK</button>
+  <p>{{data.alert}}</p>
+  <div *ngIf="loggedUser">
+    <button mat-raised-button (click)="orderService()">Order</button>
+  </div>
+  <div *ngIf="!loggedUser">
+    <form>
+      <mat-input-container>
+	<input matInput placeholder="Phone">
+      </mat-input-container>
+      <button mat-raised-button>Order</button>
+    </form>
+  </div>
+  <button mat-raised-button (click)="closeDialog()">Close</button>
 </div>
