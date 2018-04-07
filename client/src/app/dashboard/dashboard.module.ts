@@ -12,5 +12,9 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     CoreModule,
   ],
   declarations: [DashboardComponent, DashboardFilterComponent],
+  exports: [
+    DashboardComponent,
+    DashboardFilterComponent
+  ]
 })
 export class DashboardModule { }

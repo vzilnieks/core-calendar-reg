@@ -11,6 +11,7 @@ import { CoreModule } from '../core/core.module';
     AuthRoutingModule,
     CoreModule
   ],
-  declarations: [AuthComponent]
+  declarations: [AuthComponent],
+  exports: [AuthComponent]
 })
 export class AuthModule { }
