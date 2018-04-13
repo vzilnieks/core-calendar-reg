@@ -1,2 +1,11 @@
-<mat-toolbar color="primary">Calendar</mat-toolbar>
+<mat-toolbar color="primary">
+  Calendar
+  <!-- <ng&#45;container *ngIf="loggedIn"> -->
+  <ng-container>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/admin/orders" routerLinkActive="active">Orders</a>
+    <a routerLink="/admin/masters" routerLinkActive="active">Masters</a>
+    <a routerLink="/admin/users" routerLinkActive="active">Users</a>
+  </ng-container>
+</mat-toolbar>
 <router-outlet></router-outlet>

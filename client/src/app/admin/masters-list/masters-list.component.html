@@ -1,3 +1,25 @@
-<p>
-  masters-list works!
-</p>
+<form [formGroup]="masterForm" (submit)="addMaster()">
+  <mat-input-container class="master-form">
+    <mat-hint>New master</mat-hint>
+    <input required placeholder="Name" matInput formControlName="masterInput">
+  </mat-input-container>
+  <button color="primary" mat-raised-button>Add</button>
+</form>
+<div class="masters-container">
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="workingDays">
+      <mat-header-cell *matHeaderCellDef>Working Days</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+	<mat-checkbox *ngFor="let day of weekDays; let i = index;" [checked]="element.workingDays.includes(i)">
+	  {{ day }}
+	</mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

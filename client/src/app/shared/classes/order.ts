@@ -1,8 +1,11 @@
 export interface Order {
 
   id: number;
-  masterID: number;
-  day: number;
-  time: number;
+  date: any;
+  master_id: number;
+  name: string;
+  phone: string;
+  customer_id?: number;
+  time?: number;
   state: boolean;
 }
