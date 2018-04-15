@@ -1,5 +1,5 @@
-<ng-container *ngIf="loggedIn">Hello!</ng-container>
-<ng-container *ngIf="!loggedIn">
+<ng-container *ngIf="loggedIn; else elseBlock"><p>Hello!</p></ng-container>
+<ng-template #elseBlock>
   <form [formGroup]="loginForm" (submit)="login()">
     <mat-input-container class="auth-field">
       <input required placeholder="Username" matInput formControlName="username">
@@ -9,4 +9,4 @@
     </mat-input-container>
     <button color="primary" mat-raised-button>Login</button>
   </form>
-</ng-container>
+</ng-template>

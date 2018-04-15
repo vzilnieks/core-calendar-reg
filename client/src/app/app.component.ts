@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  public loggedIn: Boolean = false;
+  public loggedIn: Boolean = true;
 
   ngOnInit() {
     // if (localStorage.getItem('user')) {this.loggedIn = true}
