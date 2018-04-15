@@ -6,14 +6,16 @@ import { MastersListComponent } from './masters-list/masters-list.component';
 import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
-  { path: '', //component: AdminComponent, 
+  { 
+    path: '', //component: AdminComponent, 
     children: [
-      { path: '',
+      { 
+	path: '',
 	children: [
+	  { path: '', redirectTo: 'orders' },
 	  { path: 'orders', component: OrdersListComponent },
 	  { path: 'masters', component: MastersListComponent },
-	  { path: 'users', component: UsersListComponent },
-	  { path: '', redirectTo: 'orders' }
+	  { path: 'users', component: UsersListComponent }
 	]
       }
     ]

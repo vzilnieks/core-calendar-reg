@@ -11,8 +11,8 @@ export class UsersListComponent implements OnInit {
 
   private roles: string[] = [ 'user', 'admin' ];
   private users: User[] = [
-    {id: 1, username: 'john', name: 'John Smith', phone: '', role_id: 0 },
-    {id: 2, username: 'admin', name: 'Admin', phone: '', role_id: 1 }
+    {id: 1, username: 'john', password: '', name: 'John Smith', phone: '', role_id: 0 },
+    {id: 2, username: 'admin', password: '', name: 'Admin', phone: '', role_id: 1 }
   ];  
   public displayedColumns = [ 'username', 'name', 'role_id' ];
   public dataSource = this.users;

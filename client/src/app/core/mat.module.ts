@@ -15,7 +15,7 @@ import { MatCardModule, MatGridListModule, MatButtonModule, MatListModule, MatTa
     MatExpansionModule,
     MatDialogModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   exports: [
     MatCardModule,
@@ -27,7 +27,7 @@ import { MatCardModule, MatGridListModule, MatButtonModule, MatListModule, MatTa
     MatExpansionModule,
     MatDialogModule,
     MatListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   declarations: []
 })

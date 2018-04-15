@@ -1,9 +1,12 @@
-<form>
-  <mat-input-container class="auth-field">
-    <input required placeholder="Username" matInput>
-  </mat-input-container>
-  <mat-input-container class="auth-field">
-    <input class="auth-field" required type="password" placeholder="Password" matInput>
-  </mat-input-container>
-  <button color="primary" mat-raised-button (click)="login">Login</button>
-</form>
+<ng-container *ngIf="loggedIn">Hello!</ng-container>
+<ng-container *ngIf="!loggedIn">
+  <form [formGroup]="loginForm" (submit)="login()">
+    <mat-input-container class="auth-field">
+      <input required placeholder="Username" matInput formControlName="username">
+    </mat-input-container>
+    <mat-input-container class="auth-field">
+      <input class="auth-field" required type="password" placeholder="Password" matInput formControlName="password">
+    </mat-input-container>
+    <button color="primary" mat-raised-button>Login</button>
+  </form>
+</ng-container>

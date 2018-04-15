@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Master } from '../../shared/classes/master';
 import { MatTableDataSource } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-masters-list',
@@ -16,11 +16,10 @@ export class MastersListComponent implements OnInit {
     {id: 2, name: 'Andrew Black', workingDays: [2, 3, 6]}
   ];  
   public masterForm: FormGroup = new FormGroup({
-    masterInput: new FormControl()
+    masterInput: new FormControl('', [ Validators.required ])
   });
 
   public displayedColumns = [ 'name', 'workingDays' ];
-  // public dataSource = new MatTableDataSource(this.masters);
   public dataSource = this.masters;
 
   constructor() { }
@@ -29,9 +28,8 @@ export class MastersListComponent implements OnInit {
   }
 
   public addMaster() {
-    this.masters.push( { id: 3, name: this.masterForm.controls.masterInput.value, workingDays: [] } );
+    this.masters.push( { id: Math.floor(Math.random() * 100), name: this.masterForm.controls.masterInput.value, workingDays: [] } );
     this.dataSource = this.masters;
-    console.log(this.masters);
   }
 
 }
