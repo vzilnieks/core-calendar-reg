@@ -1,19 +1,11 @@
-<mat-toolbar color="primary">Calendar</mat-toolbar>
-<div class="menu-container">
-  <div class="menu-item">
-    <app-dashboard-filter></app-dashboard-filter>
-  </div>
-  <div class="menu-item">
-    <mat-accordion>
-      <mat-expansion-panel>
-	<mat-expansion-panel-header>
-	  <mat-panel-title>
-	    Login to control you orders
-	  </mat-panel-title>
-	</mat-expansion-panel-header>
-	<app-auth></app-auth>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-</div>
-<app-dashboard></app-dashboard>
+<mat-toolbar color="primary">
+  Calendar
+  <!-- <ng&#45;container *ngIf="loggedIn"> -->
+  <ng-container>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/admin/orders" routerLinkActive="active">Orders</a>
+    <a routerLink="/admin/masters" routerLinkActive="active">Masters</a>
+    <a routerLink="/admin/users" routerLinkActive="active">Users</a>
+  </ng-container>
+</mat-toolbar>
+<router-outlet></router-outlet>

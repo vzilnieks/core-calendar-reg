@@ -1,0 +1,26 @@
+<div class="orders-container">
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.date }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="master_id">
+      <mat-header-cell *matHeaderCellDef>Master</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.master_id }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.phone }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="customer_id">
+      <mat-header-cell *matHeaderCellDef>Registered</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.customer_id }}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from '../shared/components/modal/modal.component';
 import { Master } from '../shared/classes/master';
+import { AuthComponent } from '../auth/auth.component';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,3 +1,16 @@
+.menu-container {
+  display: flex;
+  flex-diretion: row;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.menu-item {
+  // margin: auto;
+  // padding: 5px;
+}
 .week-container {
   display: flex;
   flex-diretion: row;
