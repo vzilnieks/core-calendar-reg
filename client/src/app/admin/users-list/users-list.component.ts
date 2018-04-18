@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../shared/classes/user';
 import { MatTableDataSource } from '@angular/material';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-users-list',
@@ -9,17 +10,17 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class UsersListComponent implements OnInit {
 
-  private roles: string[] = [ 'user', 'admin' ];
-  private users: User[] = [
-    {id: 1, username: 'john', password: '', name: 'John Smith', phone: '', role_id: 0 },
-    {id: 2, username: 'admin', password: '', name: 'Admin', phone: '', role_id: 1 }
-  ];  
+  private roles: string[];
+  private users: User[];
   public displayedColumns = [ 'username', 'name', 'role_id' ];
-  public dataSource = this.users;
+  public dataSource;
 
-  constructor() { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
+    this.users = this.userService.allUsers();
+    this.roles = this.userService.allRoles();
+    this.dataSource = this.users;
   }
 
 }

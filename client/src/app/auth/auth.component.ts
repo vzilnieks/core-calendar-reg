@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,19 +14,18 @@ export class AuthComponent implements OnInit {
     username: new FormControl(),  
     password: new FormControl()
   });
-  public loggedIn: Boolean = false;
+  public loggedIn: boolean = false;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public authService: AuthService) { }
 
   ngOnInit() {
+    this.loggedIn = this.authService.loggedIn;
   }
 
   login() {
-    if (!localStorage.getItem('user')) {
-      localStorage.setItem('user', this.loginForm.get('username').value);
-      this.loggedIn = true;
-      this.router.navigate(['/admin']);
-    } else {
+    this.authService.validateUser(this.loginForm.get('username').value, this.loginForm.get('password').value);
+    if (this.authService.loggedIn) {
+      this.router.navigate(['admin']);
       this.loggedIn = true;
     }
   }

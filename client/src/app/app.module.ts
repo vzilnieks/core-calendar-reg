@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     AppComponent,
     ModalComponent,
   ],
+  providers: [AuthService],
   entryComponents: [ModalComponent],
   bootstrap: [AppComponent]
 })
