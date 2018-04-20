@@ -11,10 +11,8 @@ export class AuthService {
     if (!localStorage.getItem('user')) { // TODO: db check
       let saveData = { 'username': userData.username, 'password': userData.password };
       localStorage.setItem('user', JSON.stringify(saveData));
-      this.loggedIn = true;
-    } else {
-      this.loggedIn = true;
-    }
+    } 
+    this.loggedIn = true;
   }
 
   public logout(): void {
