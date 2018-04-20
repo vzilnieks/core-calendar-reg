@@ -16,14 +16,14 @@ export class AuthComponent implements OnInit {
   });
   public loggedIn: boolean = false;
 
-  constructor(public router: Router, public authService: AuthService) { }
+  constructor(public router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.loggedIn = this.authService.loggedIn;
   }
 
   login() {
-    this.authService.validateUser(this.loginForm.get('username').value, this.loginForm.get('password').value);
+    this.authService.validateUser(this.loginForm.value);
     if (this.authService.loggedIn) {
       this.router.navigate(['admin']);
       this.loggedIn = true;

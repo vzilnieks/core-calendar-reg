@@ -17,7 +17,7 @@ export class OrdersListComponent implements OnInit {
   public displayedColumns = [ 'name', 'phone', 'date', 'customer_id' ];
   public dataSource;
 
-  constructor(public masterService: MasterService, public orderService: OrderService) { }
+  constructor(private masterService: MasterService, private orderService: OrderService) { }
 
   ngOnInit() {
     this.masters = this.masterService.allMasters();

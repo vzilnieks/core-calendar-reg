@@ -7,10 +7,10 @@ export class AuthService {
 
   constructor() { }
 
-  public validateUser(user: string, password: string): void {
+  public validateUser(userData: any): void {
     if (!localStorage.getItem('user')) { // TODO: db check
-      localStorage.setItem('user', user);
-      localStorage.setItem('password', password);
+      let saveData = { 'username': userData.username, 'password': userData.password };
+      localStorage.setItem('user', JSON.stringify(saveData));
       this.loggedIn = true;
     } else {
       this.loggedIn = true;

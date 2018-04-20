@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'app';
-  public _loggedIn: boolean = false;
+  private _loggedIn: boolean = false;
 
   public get loggedIn(): boolean {
     this._loggedIn = this.authService.loggedIn;

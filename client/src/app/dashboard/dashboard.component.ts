@@ -15,23 +15,18 @@ export class DashboardComponent {
   private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private workHours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 
-  constructor(public dialog: MatDialog, public masterService: MasterService) { }
+  constructor(private dialog: MatDialog, private masterService: MasterService) { }
 
   public getMasters(day: number): string {
     let workingMasters = [];
     let masters = this.masterService.allMasters();
-    for ( let master in masters) {
-      for ( let workDay in masters[master].workingDays ) {
-	if (masters[master].workingDays[workDay] === day) {
-	  workingMasters.push(masters[master].name);
-	}
-      };
-    };
+    masters.forEach(master => {
+      master.workingDays.filter(workDay => workDay == day).forEach(() => workingMasters.push(master.name))
+    });
     return workingMasters.toString();
   }
 
   public openDialog(day: number, time: number, master: number) {
-    let masterName = this.masterService.masterName(master);
     this.dialog.open(
       ModalComponent, 
       {
@@ -39,7 +34,7 @@ export class DashboardComponent {
 	{
 	  alert: `
 Order to day: ${this.weekDays[day]}, time: ${this.workHours[time]},
-Master: ${masterName}
+Master: ${this.masterService.getMasterName(master)}
 	  ` 
 	}
       }

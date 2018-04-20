@@ -20,7 +20,7 @@ export class MastersListComponent implements OnInit {
 
   public displayedColumns = [ 'name', 'workingDays' ];
 
-  constructor(public masterService: MasterService) { }
+  constructor(private masterService: MasterService) { }
 
   ngOnInit() {
     this.masters = this.masterService.allMasters();

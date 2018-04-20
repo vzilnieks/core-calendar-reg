@@ -15,7 +15,7 @@ export class MasterService {
     return this.masters;
   }
 
-  public masterName(masterId: number): string {
+  public getMasterName(masterId: number): string {
     return this.masters[masterId].name;
   }
 
