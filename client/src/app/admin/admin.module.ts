@@ -9,6 +9,9 @@ import { AdminComponent } from './admin.component';
 import { MastersListComponent } from './masters-list/masters-list.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { OrdersListComponent } from './orders-list/orders-list.component';
+import { MasterService } from '../master.service';
+import { OrderService } from '../order.service';
+import { UserService } from '../user.service';
 
 @NgModule({
   imports: [
@@ -23,6 +26,11 @@ import { OrdersListComponent } from './orders-list/orders-list.component';
     MastersListComponent, 
     UsersListComponent, 
     OrdersListComponent
+  ],
+  providers: [
+    MasterService,
+    OrderService,
+    UserService
   ]
 })
 export class AdminModule { }

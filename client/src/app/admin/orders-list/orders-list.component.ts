@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Master } from '../../shared/classes/master';
 import { Order } from '../../shared/classes/order';
 import { MatTableDataSource } from '@angular/material';
+import { MasterService } from '../../master.service';
+import { OrderService } from '../../order.service';
 
 @Component({
   selector: 'app-orders-list',
@@ -10,19 +12,17 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class OrdersListComponent implements OnInit {
 
-  private masters: Master[] = [
-    {id: 1, name: 'John Smith', workingDays: [1, 2]},
-    {id: 2, name: 'Andrew Black', workingDays: [2, 3, 6]}
-  ];  
-  private orders: Order[] = [
-    { id: 1, name: 'A B', phone: '4324324', master_id: 1, date: new Date('2018-04-01'), state: true }
-  ];
+  private masters: Master[];
+  private orders: Order[];
   public displayedColumns = [ 'name', 'phone', 'date', 'customer_id' ];
-  public dataSource = this.orders;
+  public dataSource;
 
-  constructor() { }
+  constructor(private masterService: MasterService, private orderService: OrderService) { }
 
   ngOnInit() {
+    this.masters = this.masterService.allMasters();
+    this.orders = this.orderService.allOrders();
+    this.dataSource = this.orders;
   }
 
 }
