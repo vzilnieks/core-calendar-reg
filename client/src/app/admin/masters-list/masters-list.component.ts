@@ -12,7 +12,8 @@ import { MasterService } from '../../master.service';
 export class MastersListComponent implements OnInit {
 
   private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
-  private masters: Master[];
+  private masters: Master[] = [];
+
   public masterForm: FormGroup = new FormGroup({
     masterInput: new FormControl('', [ Validators.required ])
   });
@@ -23,7 +24,9 @@ export class MastersListComponent implements OnInit {
   constructor(private masterService: MasterService) { }
 
   ngOnInit() {
-    this.masters = this.masterService.allMasters();
+    this.masterService.getMaster().subscribe(master => {
+      this.masters.push(master);
+    });
     this.dataSource = this.masters;
   }
 

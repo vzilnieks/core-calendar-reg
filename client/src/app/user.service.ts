@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from './shared/classes/user';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/from';
 
 @Injectable()
 export class UserService {
@@ -11,12 +13,12 @@ export class UserService {
 
   constructor() { }
 
-  public allUsers(): User[] {
-    return this.users;
+  public getUser(): Observable<User> {
+    return Observable.from(this.users);
   }
 
-  public allRoles(): string[] {
-    return this.roles;
+  public getRole(): Observable<string> {
+    return Observable.from(this.roles);
   }
 
 }

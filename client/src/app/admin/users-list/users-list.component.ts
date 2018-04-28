@@ -10,16 +10,20 @@ import { UserService } from '../../user.service';
 })
 export class UsersListComponent implements OnInit {
 
-  private roles: string[];
-  private users: User[];
+  private roles: string[] = [];
+  private users: User[] = [];
   public displayedColumns = [ 'username', 'name', 'role_id' ];
   public dataSource;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.users = this.userService.allUsers();
-    this.roles = this.userService.allRoles();
+    this.userService.getUser().subscribe(user => {
+      this.users.push(user);
+    });
+    this.userService.getRole().subscribe(role => {
+      this.roles.push(role);
+    });
     this.dataSource = this.users;
   }
 

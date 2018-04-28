@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Master } from './shared/classes/master';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/from';
 
 @Injectable()
 export class MasterService {
@@ -11,8 +13,8 @@ export class MasterService {
 
   constructor() { }
 
-  public allMasters(): Master[] {
-    return this.masters;
+  public getMaster(): Observable<Master> {
+    return Observable.from(this.masters);
   }
 
   public getMasterName(masterId: number): string {

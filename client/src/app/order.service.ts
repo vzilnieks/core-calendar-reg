@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Order } from './shared/classes/order';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/from';
 
 @Injectable()
 export class OrderService {
@@ -10,8 +12,8 @@ export class OrderService {
 
   constructor() { }
 
-  public allOrders(): Order[] {
-    return this.orders;
+  public getOrder(): Observable<Order> {
+    return Observable.from(this.orders);
   }
 
 }

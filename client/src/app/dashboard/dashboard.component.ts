@@ -19,9 +19,14 @@ export class DashboardComponent {
 
   public getMasters(day: number): string {
     let workingMasters = [];
-    let masters = this.masterService.allMasters();
+    let masters: Master[] = [];
+    this.masterService.getMaster().subscribe(master => {
+      masters.push(master);
+    });
     masters.forEach(master => {
-      master.workingDays.filter(workDay => workDay == day).forEach(() => workingMasters.push(master.name))
+      master.workingDays
+	  .filter(workDay => workDay == day)
+	  .forEach(() => workingMasters.push(master.name))
     });
     return workingMasters.toString();
   }

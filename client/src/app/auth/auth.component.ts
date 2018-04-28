@@ -14,20 +14,28 @@ export class AuthComponent implements OnInit {
     username: new FormControl(),  
     password: new FormControl()
   });
-  public loggedIn: boolean = false;
+  public loggedUser: string;
+  public showLoggedIn: boolean;
 
   constructor(public router: Router, private authService: AuthService) { }
 
   ngOnInit() {
-    this.loggedIn = this.authService.loggedIn;
+    this.loggedUser = this.authService.getCurrentUserName();
+    this.showLoggedIn = this.authService.loggedIn;
   }
 
   login() {
-    this.authService.validateUser(this.loginForm.value);
-    if (this.authService.loggedIn) {
-      this.router.navigate(['admin']);
-      this.loggedIn = true;
+    if (this.authService.validateUser(this.loginForm.value)) {
+      this.showLoggedIn = true;
+      this.router.navigate(['/admin']);
+    } else { 
+      this.showLoggedIn = false;
+      this.router.navigate(['']);
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }
