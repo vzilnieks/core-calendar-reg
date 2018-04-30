@@ -13,11 +13,12 @@ import { AuthComponent } from '../auth/auth.component';
 export class DashboardComponent {
 
   private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
-  private workHours = [ 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+  private workHours = [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+  private selectedMasterId: string;
 
   constructor(private dialog: MatDialog, private masterService: MasterService) { }
 
-  public getMasters(day: number): string {
+  public getMasters(day: number): string[] {
     let workingMasters = [];
     let masters: Master[] = [];
     this.masterService.getMaster().subscribe(master => {
@@ -28,7 +29,7 @@ export class DashboardComponent {
 	  .filter(workDay => workDay == day)
 	  .forEach(() => workingMasters.push(master.name))
     });
-    return workingMasters.toString();
+    return workingMasters;
   }
 
   public openDialog(day: number, time: number, master: number) {

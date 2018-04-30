@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { AuthModule } from '../auth/auth.module';
 import { MasterService } from '../master.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
@@ -15,7 +16,9 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     SharedModule,
     CoreModule,
     AuthModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent, 
