@@ -24,14 +24,21 @@ export class MastersListComponent implements OnInit {
   constructor(private masterService: MasterService) { }
 
   ngOnInit() {
-    this.masterService.getMaster().subscribe(master => {
-      this.masters.push(master);
-    });
+    this.masters = this.getMasters();
     this.dataSource = this.masters;
+  }
+
+  private getMasters(): Master[] {
+    let mastersArray: Master[] = [];
+    this.masterService.getMaster().subscribe(master => {
+      mastersArray.push(master);
+    });
+    return mastersArray;
   }
 
   public addMaster() {
     this.masterService.addMaster(this.masterForm.controls.masterInput.value);
+    this.masters = this.getMasters();
     this.dataSource = this.masters;
   }
 

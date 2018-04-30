@@ -21,4 +21,9 @@ export class UserService {
     return Observable.from(this.roles);
   }
 
+  public addUser(username:string, name: string, password: string, phone: string) {
+    this.users.push( 
+      { id: Math.floor(Math.random() * 100), username: username, name: name, password: password, phone: phone, role_id: 0 } );
+  }
+
 }

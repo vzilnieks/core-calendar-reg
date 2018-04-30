@@ -1,3 +1,13 @@
+<form [formGroup]="userForm" (submit)="addUser()">
+  <mat-input-container class="user-form">
+    <mat-hint>New user</mat-hint>
+    <input required placeholder="Username" matInput formControlName="usernameInput">
+    <input required placeholder="Password" matInput formControlName="passwordInput" password>
+    <input required placeholder="Name" matInput formControlName="userInput">
+    <input required placeholder="Phone" matInput formControlName="phoneInput">
+  </mat-input-container>
+  <button color="primary" mat-raised-button>Add</button>
+</form>
 <div class="users-container">
   <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="username">
@@ -11,7 +21,10 @@
     <ng-container matColumnDef="role_id">
       <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
       <mat-cell *matCellDef="let element">
-	<mat-checkbox *ngFor="let role of roles; let i = index;" [checked]="element.role_id === i">
+	<mat-checkbox 
+	    color="primary" 
+	    *ngFor="let role of roles; let i = index;" 
+	    [checked]="element.role_id === i">
 	  {{ role }}
 	</mat-checkbox>
       </mat-cell>
