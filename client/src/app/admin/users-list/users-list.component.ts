@@ -16,7 +16,10 @@ export class UsersListComponent implements OnInit {
   public displayedColumns = [ 'username', 'name', 'role_id' ];
   public dataSource;
   public userForm: FormGroup = new FormGroup({
-    userInput: new FormControl('', [ Validators.required ])
+    usernameInput: new FormControl('', [ Validators.required ]),
+    passwordInput: new FormControl('', [ Validators.required ]),
+    userInput: new FormControl('', [ Validators.required ]),
+    phoneInput: new FormControl(''),
   });
 
   constructor(private userService: UserService) { }
@@ -37,8 +40,12 @@ export class UsersListComponent implements OnInit {
     return userArray;
   }
 
-  public addMaster() {
-    this.userService.addUser(this.userForm.controls.userInput.value);
+  public addUser() {
+    this.userService.addUser(
+	this.userForm.controls.usernameInput.value,
+	this.userForm.controls.passwordInput.value,
+	this.userForm.controls.userInput.value,
+	this.userForm.controls.phoneInput.value);
     this.users = this.getUsers();
     this.dataSource = this.users;
   }
