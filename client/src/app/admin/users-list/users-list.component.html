@@ -26,16 +26,28 @@
     <ng-container matColumnDef="role_id">
       <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
       <mat-cell *matCellDef="let element">
-	<form [formGroup]="userRoleForm">
-	  <mat-checkbox 
-	      color="primary" 
-	      *ngFor="let role of roles; let i = index" 
-	      [formControlName]="role"
-	      [name]="role"
-	      [checked]="element.role_id === i">
-	    {{ role }}
-	  </mat-checkbox>
-	</form>
+        <form [formGroup]="userRoleForm">
+          <mat-checkbox 
+              color="primary" 
+              *ngFor="let role of roles; let i = index" 
+              [checked]="element.role_id.includes(i)"
+              [formControlName]="role"
+              [name]="role">
+            {{ role }}
+          </mat-checkbox>
+          <button 
+              color="primary" 
+              mat-raised-button 
+              (click)="onUpdate(element.username)">
+            Update
+          </button>
+          <button 
+              color="primary" 
+              mat-raised-button 
+              (click)="onDelete(element.username)">
+            Delete
+          </button>
+        </form>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

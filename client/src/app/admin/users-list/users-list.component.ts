@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../shared/classes/user';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -9,7 +9,7 @@ import { UserService } from '../../user.service';
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit, OnChanges {
+export class UsersListComponent implements OnInit {
 
   private roles: string[] = [];
   private users: User[] = [];
@@ -34,17 +34,22 @@ export class UsersListComponent implements OnInit, OnChanges {
     this.roles.forEach(role => {
       this.userRoleForm.addControl(role, new FormControl(''));
     });
-    console.log(this.userRoleForm);
   }
 
-  ngOnChanges() {
+  onUpdate(username: string) {
     let rolesArray: number[] = [];
     this.roles.forEach((role, index) => {
       if (this.userRoleForm.get(role).value) {
-	rolesArray.push(index);
-      }
+        rolesArray.push(index);
+      };
     });
-    this.userService.updateUser(userId, rolesArray);
+    this.userService.updateUser(username, rolesArray);
+    this.users = this.getUsers();
+    this.dataSource = this.users;
+  }
+
+  onDelete(username: string) {
+    this.userService.deleteUser(username);
     this.users = this.getUsers();
     this.dataSource = this.users;
   }
@@ -59,11 +64,10 @@ export class UsersListComponent implements OnInit, OnChanges {
 
   public addUser() {
     this.userService.addUser(
-	this.userForm.controls.usernameInput.value,
-	this.userForm.controls.passwordInput.value,
-	this.userForm.controls.userInput.value,
-	this.userForm.controls.phoneInput.value,
-	rolesArray);
+        this.userForm.controls.usernameInput.value,
+        this.userForm.controls.passwordInput.value,
+        this.userForm.controls.userInput.value,
+        this.userForm.controls.phoneInput.value)
     this.users = this.getUsers();
     this.dataSource = this.users;
   }
