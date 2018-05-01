@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { User } from '../../shared/classes/user';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -9,7 +9,7 @@ import { UserService } from '../../user.service';
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, OnChanges {
 
   private roles: string[] = [];
   private users: User[] = [];
@@ -21,14 +21,31 @@ export class UsersListComponent implements OnInit {
     userInput: new FormControl('', [ Validators.required ]),
     phoneInput: new FormControl(''),
   });
+  public userRoleForm: FormGroup = new FormGroup({});
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.users = this.getUsers();
+    this.dataSource = this.users;
     this.userService.getRole().subscribe(role => {
       this.roles.push(role);
     });
+    this.roles.forEach(role => {
+      this.userRoleForm.addControl(role, new FormControl(''));
+    });
+    console.log(this.userRoleForm);
+  }
+
+  ngOnChanges() {
+    let rolesArray: number[] = [];
+    this.roles.forEach((role, index) => {
+      if (this.userRoleForm.get(role).value) {
+	rolesArray.push(index);
+      }
+    });
+    this.userService.updateUser(userId, rolesArray);
+    this.users = this.getUsers();
     this.dataSource = this.users;
   }
 
@@ -45,10 +62,10 @@ export class UsersListComponent implements OnInit {
 	this.userForm.controls.usernameInput.value,
 	this.userForm.controls.passwordInput.value,
 	this.userForm.controls.userInput.value,
-	this.userForm.controls.phoneInput.value);
+	this.userForm.controls.phoneInput.value,
+	rolesArray);
     this.users = this.getUsers();
     this.dataSource = this.users;
   }
-
 
 }

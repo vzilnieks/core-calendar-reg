@@ -22,8 +22,20 @@ export class UserService {
   }
 
   public addUser(username: string, password: string, user: string, phone: string) {
-    this.users.push( 
-      { id: Math.floor(Math.random() * 100), username: username, name: user, password: password, phone: phone, role_id: 0 } );
+    this.users.push({ 
+      id: Math.floor(Math.random() * 100), 
+      username: username, 
+      name: user, 
+      password: password, 
+      phone: phone, 
+      role_id: 0 
+    });
   }
+
+  public updateUser(user: string, roles: Array<number>) {
+    let userIndex = this.users.findIndex(arr => arr.username === user);
+    if (userIndex) {
+      this.users[userIndex].role_id =
+
 
 }

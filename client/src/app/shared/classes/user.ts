@@ -5,5 +5,5 @@ export interface User {
   name: string;
   password: string;
   phone?: string;
-  role_id: number;
+  role_id: number[];
 }
