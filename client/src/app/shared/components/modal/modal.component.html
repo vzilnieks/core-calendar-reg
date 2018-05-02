@@ -4,11 +4,11 @@
     <button mat-raised-button (click)="orderService()">Order</button>
   </div>
   <div *ngIf="!loggedUser">
-    <form>
+    <form [formGroup]="modalForm">
       <mat-input-container>
-	<input matInput placeholder="Phone">
+        <input matInput formControlName="phone" placeholder="Phone">
       </mat-input-container>
-      <button mat-raised-button>Order</button>
+      <button mat-raised-button (click)="orderService()">Order</button>
     </form>
   </div>
   <button mat-raised-button (click)="closeDialog()">Close</button>

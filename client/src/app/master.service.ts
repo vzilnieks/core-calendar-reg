@@ -18,12 +18,28 @@ export class MasterService {
   }
 
   public getMasterName(masterId: number): string {
-    return this.masters[masterId].name;
+    let masterName: string;
+    this.masters.forEach(master => {
+      if (master.id === masterId) { masterName = master.name; }
+    });
+    return masterName;
   }
 
   public addMaster(name: string) {
     this.masters.push( 
       { id: Math.floor(Math.random() * 100), name: name, workingDays: [] } );
+  }
+
+  public updateMaster(masterId: number, days: number[]) {
+    let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
+    // TODO: db
+    this.masters[masterIndex].workingDays = days;
+  }
+
+  public deleteMaster(masterId: number) {
+    let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
+    // TODO: db
+    this.masters.splice(masterIndex, 1);
   }
 
 }

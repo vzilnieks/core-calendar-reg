@@ -22,6 +22,7 @@ export class UserService {
   }
 
   public addUser(username: string, password: string, user: string, phone: string) {
+    // TODO: check exists, db
     this.users.push({ 
       id: Math.floor(Math.random() * 100), 
       username: username, 
@@ -34,11 +35,13 @@ export class UserService {
 
   public updateUser(username: string, roles: number[]) {
     let userIndex = this.users.findIndex(arr => arr.username === username);
+    // TODO: db
     this.users[userIndex].role_id = roles;
   }
 
   public deleteUser(username: string) {
     let userIndex = this.users.findIndex(arr => arr.username === username);
+    // TODO: db
     this.users.splice(userIndex, 1);
   }
 }

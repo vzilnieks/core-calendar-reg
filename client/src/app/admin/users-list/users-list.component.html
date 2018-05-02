@@ -6,7 +6,7 @@
     <input required name="password" placeholder="Password" type="password" matInput formControlName="passwordInput">
   </mat-form-field>
   <mat-form-field class="user-form">
-    <input required name="user" placeholder="Name" matInput formControlName="userInput">
+    <input required name="name" placeholder="Name" matInput formControlName="nameInput">
   </mat-form-field>
   <mat-form-field class="user-form">
     <input name="phone" placeholder="Phone" matInput formControlName="phoneInput">
@@ -31,9 +31,10 @@
               color="primary" 
               *ngFor="let role of roles; let i = index" 
               [checked]="element.role_id.includes(i)"
-              [formControlName]="role"
-              [name]="role">
-            {{ role }}
+              [formControlName]="role">
+            <!-- {{ role }} -->
+            {{element.role_id.includes(i)}}
+              <!-- [formControlName]="role" -->
           </mat-checkbox>
           <button 
               color="primary" 
