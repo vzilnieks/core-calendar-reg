@@ -44,10 +44,8 @@ export class DashboardComponent implements OnInit {
 
   private openDialog(dayN: number, time: number) {
     let day = this.weekDays[dayN];
-    console.log(this.masterForm[day]);
     let choosedMaster: number = this.masterForm[day].get("master").value;
     if (choosedMaster) {
-      console.log("master",this.masterService.getMasterName(choosedMaster));
       this.dialog.open( ModalComponent, {
         data: {
           alert: 

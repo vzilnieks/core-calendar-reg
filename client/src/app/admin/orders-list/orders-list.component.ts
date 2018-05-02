@@ -14,7 +14,7 @@ export class OrdersListComponent implements OnInit {
 
   private masters: Master[] = [];
   private orders: Order[]= [];
-  public displayedColumns = [ 'name', 'phone', 'date', 'customer_id' ];
+  public displayedColumns = [ 'name', 'phone', 'date', 'master', 'customer_id' ];
   public dataSource;
 
   constructor(private masterService: MasterService, private orderService: OrderService) { }
@@ -27,6 +27,10 @@ export class OrdersListComponent implements OnInit {
       this.orders.push(order);
     });
     this.dataSource = this.orders;
+  }
+
+  private getMasterName(masterId: number) {
+    return this.masterService.getMasterName(masterId);
   }
 
 }
