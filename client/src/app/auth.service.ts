@@ -7,14 +7,39 @@ export class AuthService {
 
   constructor() { }
 
-  public validateUser(userData: any): void {
-    if (!localStorage.getItem('user')) { // TODO: db check
-      let saveData = { 'username': userData.username, 'password': userData.password };
-      localStorage.setItem('user', JSON.stringify(saveData));
-    } 
-    this.loggedIn = true;
+  private userSaved(): boolean {
+    return (!localStorage.getItem('user'));
   }
 
+  private saveUserData(username: string, password: string): void {
+    let saveData = { 'username': username, 'password': password };
+    localStorage.setItem('user', JSON.stringify(saveData));
+  }
+
+  public validateUser(userData: any): boolean {
+    if (!this.userSaved()) {
+      this.saveUserData( userData.username, userData.password);
+      this.loggedIn = true;
+      return this.loggedIn;
+    } 
+    
+    let userSaved = JSON.parse(localStorage.getItem('user'));
+    if (userSaved.username === userData.username && 
+	userSaved.password === userData.password) {
+      this.loggedIn = true; 
+      return this.loggedIn;
+    }
+
+    this.loggedIn = false;
+    return this.loggedIn;
+  }
+
+  public getCurrentUserName(): string {
+    if (!this.loggedIn) return '';
+    let userSaved = JSON.parse(localStorage.getItem('user'));
+    return userSaved.username;
+  }
+  
   public logout(): void {
     this.loggedIn = false;
   }

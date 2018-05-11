@@ -1,4 +1,7 @@
-<ng-container *ngIf="loggedIn; else elseBlock"><p>Hello!</p></ng-container>
+<ng-container *ngIf="loggedIn; else elseBlock">
+  <p>Hello {{loggedUser}}!</p>
+  <button color="primary" mat-raised-button (submit)="logout()">Logout</button>
+</ng-container>
 <ng-template #elseBlock>
   <form [formGroup]="loginForm" (submit)="login()">
     <mat-input-container class="auth-field">
