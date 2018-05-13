@@ -8,8 +8,7 @@ export class AuthService {
   constructor() { }
 
   private userSaved(): boolean {
-    if (!localStorage.getItem('user')) return false;
-    return true;
+    return (!localStorage.getItem('user'));
   }
 
   private saveUserData(username: string, password: string): void {
@@ -22,14 +21,15 @@ export class AuthService {
       this.saveUserData( userData.username, userData.password);
       this.loggedIn = true;
       return this.loggedIn;
-    } else {
-      let userSaved = JSON.parse(localStorage.getItem('user'));
-      if (userSaved.username === userData.username && 
-	  userSaved.password === userData.password) {
-	this.loggedIn = true; 
-	return this.loggedIn;
-      }
+    } 
+    
+    let userSaved = JSON.parse(localStorage.getItem('user'));
+    if (userSaved.username === userData.username && 
+	userSaved.password === userData.password) {
+      this.loggedIn = true; 
+      return this.loggedIn;
     }
+
     this.loggedIn = false;
     return this.loggedIn;
   }
