@@ -32,8 +32,8 @@
               *ngFor="let role of roles; let i = index" 
               [checked]="element.role_id.includes(i)"
               [formControlName]="role">
-            <!-- {{ role }} -->
-            {{element.role_id.includes(i)}}
+            {{ role }}
+            <!-- {{element.role_id.includes(i)}} -->
               <!-- [formControlName]="role" -->
           </mat-checkbox>
           <button 

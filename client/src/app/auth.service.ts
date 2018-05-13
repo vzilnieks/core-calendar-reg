@@ -7,7 +7,7 @@ export class AuthService {
 
   constructor() { }
 
-  private userSaved(): boolean {
+  private notUserSaved(): boolean {
     return (!localStorage.getItem('user'));
   }
 
@@ -17,8 +17,8 @@ export class AuthService {
   }
 
   public validateUser(userData: any): boolean {
-    if (!this.userSaved()) {
-      this.saveUserData( userData.username, userData.password);
+    if (this.notUserSaved()) {
+      this.saveUserData(userData.username, userData.password);
       this.loggedIn = true;
       return this.loggedIn;
     } 
