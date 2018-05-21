@@ -24,14 +24,31 @@
 	</mat-card-title>
       </mat-card-header>
       <mat-list role="list">
-	<mat-list-item class="masters-line">{{getMasters(i)}}</mat-list-item>
+	<mat-list-item role="listitem">
+	  <form [formGroup]="masterForm[day]">
+	    <mat-radio-group class="day-card masters-group" formControlName="master">
+	      <mat-radio-button 
+		  *ngFor="let master of getMasters(i); let im = index" 
+		  color="primary"    
+		  [value]="master.id">
+		{{ master.name }}
+	      </mat-radio-button>
+	    </mat-radio-group>
+	  </form>
+	</mat-list-item>
 	<mat-divider></mat-divider>
 	<mat-list-item 
-	    class="time-line" 
 	    role="listitem" 
-	    *ngFor="let hour of workHours; let hourId = index"
-	    (click)="openDialog(i,hourId,1)">
-	  <p>{{hour}} Order</p>
+	    class="day-card time-line" 
+	    *ngFor="let hour of workHours; let hourId = index">
+	  <button 
+	      class="orders-line" 
+	      color="primary" 
+	      [disabled]="false"
+	      (click)="openDialog(i,hourId)"
+	      mat-button>
+	    {{hour}}:00 {{ (true) ? "Order" : "" }}
+	  </button>
 	</mat-list-item>
       </mat-list>
     </mat-card>

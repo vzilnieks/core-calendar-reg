@@ -5,7 +5,7 @@ export interface Order {
   master_id: number;
   name: string;
   phone: string;
-  customer_id?: number;
+  customer_id?: string;
   time?: number;
   state: boolean;
 }

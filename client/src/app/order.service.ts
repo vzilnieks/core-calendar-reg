@@ -16,4 +16,15 @@ export class OrderService {
     return Observable.from(this.orders);
   }
 
+  public addOrder(phone: string) {
+    this.orders.push({
+      id: Math.floor(Math.random() * 100),
+      name: '',
+      phone: phone,
+      master_id: 0,
+      date: new Date(),
+      state: true
+    });
+  }
+
 }

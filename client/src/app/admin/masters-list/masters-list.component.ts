@@ -14,25 +14,56 @@ export class MastersListComponent implements OnInit {
   private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private masters: Master[] = [];
 
-  public masterForm: FormGroup = new FormGroup({
+  private masterForm: FormGroup = new FormGroup({
     masterInput: new FormControl('', [ Validators.required ])
   });
-  public dataSource: any;
+  private workDayForm: FormGroup = new FormGroup({});
 
-  public displayedColumns = [ 'name', 'workingDays' ];
+  private dataSource: any;
+  private displayedColumns = [ 'name', 'workingDays' ];
 
   constructor(private masterService: MasterService) { }
 
   ngOnInit() {
-    this.masterService.getMaster().subscribe(master => {
-      this.masters.push(master);
+    this.weekDays.forEach(day => {
+      this.workDayForm.addControl(day, new FormControl(''));
     });
+    this.refreshTable();
+  }
+
+  private refreshTable(): void {
+    this.masters = this.getMasters();
     this.dataSource = this.masters;
   }
 
-  public addMaster() {
+  private getMasters(): Master[] {
+    let mastersArray: Master[] = [];
+    this.masterService.getMaster().subscribe(master => {
+      mastersArray.push(master);
+    });
+    return mastersArray;
+  }
+
+  private onUpdate(masterId: number) {
+    let daysArray: number[] = [];
+    this.weekDays.forEach((day, index) => {
+      if (this.workDayForm.get(day).value) {
+        daysArray.push(index);
+      };
+    });
+    this.masterService.updateMaster(masterId, daysArray);
+    this.refreshTable();
+  }
+
+  private onDelete(masterId: number) {
+    this.masterService.deleteMaster(masterId);
+    this.refreshTable();
+  }
+
+
+  private addMaster() {
     this.masterService.addMaster(this.masterForm.controls.masterInput.value);
-    this.dataSource = this.masters;
+    this.refreshTable();
   }
 
 }

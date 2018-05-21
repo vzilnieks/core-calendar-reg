@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { AuthModule } from '../auth/auth.module';
 import { MasterService } from '../master.service';
+import { OrderService } from '../order.service';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
@@ -15,12 +16,15 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
     SharedModule,
     CoreModule,
     AuthModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
   ],
   declarations: [
     DashboardComponent, 
     DashboardFilterComponent,
   ],
-  providers: [MasterService]
+  providers: [
+    MasterService, 
+    OrderService
+  ]
 })
 export class DashboardModule { }

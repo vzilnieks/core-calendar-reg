@@ -1,3 +1,18 @@
+<form [formGroup]="userForm" (submit)="addUser()">
+  <mat-form-field class="user-form">
+    <input name="username" placeholder="Username" matInput formControlName="usernameInput">
+  </mat-form-field>
+  <mat-form-field class="user-form">
+    <input name="password" placeholder="Password" type="password" matInput formControlName="passwordInput">
+  </mat-form-field>
+  <mat-form-field class="user-form">
+    <input name="name" placeholder="Name" matInput formControlName="nameInput">
+  </mat-form-field>
+  <mat-form-field class="user-form">
+    <input name="phone" placeholder="Phone" matInput formControlName="phoneInput">
+  </mat-form-field>
+  <button color="primary" mat-raised-button>Add</button>
+</form>
 <div class="users-container">
   <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="username">
@@ -11,9 +26,29 @@
     <ng-container matColumnDef="role_id">
       <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
       <mat-cell *matCellDef="let element">
-	<mat-checkbox *ngFor="let role of roles; let i = index;" [checked]="element.role_id === i">
-	  {{ role }}
-	</mat-checkbox>
+        <form [formGroup]="userRoleForm">
+          <mat-checkbox 
+              color="primary" 
+              *ngFor="let role of roles; let i = index" 
+              [checked]="element.role_id.includes(i)"
+              [formControlName]="role">
+            {{ role }}
+            <!-- {{element.role_id.includes(i)}} -->
+              <!-- [formControlName]="role" -->
+          </mat-checkbox>
+          <button 
+              color="primary" 
+              mat-raised-button 
+              (click)="onUpdate(element.username)">
+            Update
+          </button>
+          <button 
+              color="primary" 
+              mat-raised-button 
+              (click)="onDelete(element.username)">
+            Delete
+          </button>
+        </form>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
