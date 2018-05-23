@@ -1,12 +1,12 @@
 <form [formGroup]="userForm" (submit)="addUser()">
   <mat-form-field class="user-form">
-    <input required name="username" placeholder="Username" matInput formControlName="usernameInput">
+    <input name="username" placeholder="Username" matInput formControlName="usernameInput">
   </mat-form-field>
   <mat-form-field class="user-form">
-    <input required name="password" placeholder="Password" type="password" matInput formControlName="passwordInput">
+    <input name="password" placeholder="Password" type="password" matInput formControlName="passwordInput">
   </mat-form-field>
   <mat-form-field class="user-form">
-    <input required name="name" placeholder="Name" matInput formControlName="nameInput">
+    <input name="name" placeholder="Name" matInput formControlName="nameInput">
   </mat-form-field>
   <mat-form-field class="user-form">
     <input name="phone" placeholder="Phone" matInput formControlName="phoneInput">

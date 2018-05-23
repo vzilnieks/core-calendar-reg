@@ -6,7 +6,7 @@
   <div *ngIf="!loggedUser">
     <form [formGroup]="modalForm">
       <mat-input-container>
-        <input matInput required formControlName="phone" placeholder="Phone">
+        <input matInput formControlName="phone" placeholder="Phone">
       </mat-input-container>
       <button mat-raised-button (click)="makeOrder()">Order</button>
     </form>

@@ -14,7 +14,7 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 export class ModalComponent implements OnInit {
 
   public modalForm: FormGroup = new FormGroup({
-    "phone": new FormControl('')
+    "phone": new FormControl('', [ Validators.required ])
   });
 
   constructor(

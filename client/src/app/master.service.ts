@@ -18,11 +18,7 @@ export class MasterService {
   }
 
   public getMasterName(masterId: number): string {
-    let masterName: string;
-    this.masters.forEach(master => {
-      if (master.id === masterId) { masterName = master.name; }
-    });
-    return masterName;
+    return this.masters.filter(master => master.id === masterId)[0].name;
   }
 
   public addMaster(name: string) {
