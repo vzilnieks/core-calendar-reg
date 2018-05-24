@@ -6,6 +6,7 @@ import { CoreModule } from '../core/core.module';
 import { AuthModule } from '../auth/auth.module';
 import { MasterService } from '../master.service';
 import { OrderService } from '../order.service';
+import { HttpService } from '../http.service';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
@@ -24,7 +25,8 @@ import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.co
   ],
   providers: [
     MasterService, 
-    OrderService
+    OrderService,
+    HttpService
   ]
 })
 export class DashboardModule { }

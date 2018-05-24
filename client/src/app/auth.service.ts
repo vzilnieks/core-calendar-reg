@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService {
 
   public loggedIn: boolean;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
-  private notUserSaved(): boolean {
-    return (!localStorage.getItem('user'));
+  private userSaved(): boolean {
+    if (!localStorage.getItem('user')) return false;
+    return true;
   }
 
   private saveUserData(username: string, password: string): void {
-    let saveData = { 'username': username, 'password': password };
+    let saveData = { 
+      'username': username, 
+      'password': password 
+    };
     localStorage.setItem('user', JSON.stringify(saveData));
   }
 
   public validateUser(userData: any): boolean {
-    if (this.notUserSaved()) {
-      this.saveUserData(userData.username, userData.password);
-      this.loggedIn = true;
-      return this.loggedIn;
-    } 
-    
+    this.userService.getUser(userData.username);
     let userSaved = JSON.parse(localStorage.getItem('user'));
     if (userSaved.username === userData.username && 
-	userSaved.password === userData.password) {
+	      userSaved.password === userData.password) {
       this.loggedIn = true; 
       return this.loggedIn;
     }
@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   public getCurrentUserName(): string {
-    if (!this.loggedIn) return '';
+    if (!this.loggedIn) return null;
     let userSaved = JSON.parse(localStorage.getItem('user'));
     return userSaved.username;
   }

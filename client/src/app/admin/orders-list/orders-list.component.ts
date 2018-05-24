@@ -20,12 +20,8 @@ export class OrdersListComponent implements OnInit {
   constructor(private masterService: MasterService, private orderService: OrderService) { }
 
   ngOnInit() {
-    this.masterService.getMaster().subscribe(master => {
-      this.masters.push(master);
-    });
-    this.orderService.getOrder().subscribe(order => {
-      this.orders.push(order);
-    });
+    this.masterService.getMasters().subscribe(masters => this.masters = masters);
+    this.orderService.getOrder().subscribe(order => { this.orders.push(order); });
     this.dataSource = this.orders;
   }
 

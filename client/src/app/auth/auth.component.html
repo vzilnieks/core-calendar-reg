@@ -1,4 +1,4 @@
-<ng-container *ngIf="loggedIn; else elseBlock">
+<ng-container *ngIf="showLoggedIn; else elseBlock">
   <p>Hello {{loggedUser}}!</p>
   <button color="primary" mat-raised-button (submit)="logout()">Logout</button>
 </ng-container>

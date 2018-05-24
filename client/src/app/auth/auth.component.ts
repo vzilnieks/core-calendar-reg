@@ -18,20 +18,18 @@ export class AuthComponent {
   private _loggedUser: string;
 
   public get loggedUser(): string {
-    this._loggedUser = this.authService.getCurrentUserName();
-    return this._loggedUser;
+    return this.authService.getCurrentUserName();
   }
 
   private _showLoggedIn: boolean;
 
   public get showLoggedIn(): boolean {
-    this._showLoggedIn = this.authService.loggedIn;
-    return this._showLoggedIn;
+    return this.authService.loggedIn;
   }
 
   constructor(public router: Router, private authService: AuthService) { }
 
-  login() {
+  public login() {
     if (this.authService.validateUser(this.loginForm.value)) {
       this._showLoggedIn = true;
       this.router.navigate(['/admin']);
@@ -40,7 +38,7 @@ export class AuthComponent {
     this.router.navigate(['']);
   }
 
-  logout() {
+  public logout() {
     this.authService.logout();
   }
 

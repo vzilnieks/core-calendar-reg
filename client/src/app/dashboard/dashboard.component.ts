@@ -25,15 +25,13 @@ export class DashboardComponent implements OnInit {
     this.weekDays.forEach((day, dayN) => {
       this.masterForm[day] = new FormGroup({});
       this.masterForm[day].addControl("master", new FormControl(''));
-    })
+    });
   }
 
   private getMasters(dayN: number): Master[] {
     let workingMasters: Master[] = [];
     let masters: Master[] = [];
-    this.masterService.getMaster().subscribe(master => {
-      masters.push(master);
-    });
+    this.masterService.getMasters().subscribe(masters => masters = masters);
     masters.forEach(master => {
       master.workingDays
           .filter(workDay => workDay === dayN)

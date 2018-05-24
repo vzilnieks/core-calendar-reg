@@ -37,11 +37,8 @@ export class MastersListComponent implements OnInit {
   }
 
   private getMasters(): Master[] {
-    let mastersArray: Master[] = [];
-    this.masterService.getMaster().subscribe(master => {
-      mastersArray.push(master);
-    });
-    return mastersArray;
+    this.masterService.getMasters().subscribe(masters => this.masters = masters);
+    return this.masters;
   }
 
   private onUpdate(masterId: number) {

@@ -1,41 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Master } from './shared/classes/master';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
+import { HttpService } from './http.service';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class MasterService {
 
-  private masters: Master[] = [
-    {id: 1, name: "John Smith", workingDays: [1, 2]},
-    {id: 2, name: "Andrew Black", workingDays: [2, 3, 6]}
-  ];
+  private mastersUrl: string = 'https://5b01889d642cef0014b09278.mockapi.io/core-reg/masters';
 
-  constructor() { }
+  constructor(private http: HttpService) { }
 
-  public getMaster(): Observable<Master> {
-    return Observable.from(this.masters);
+  public getMasters(): Observable<any> {
+    return this.http.httpGet(this.mastersUrl).do(data => console.log(data));
   }
 
   public getMasterName(masterId: number): string {
-    return this.masters.filter(master => master.id === masterId)[0].name;
+    // let masters: Master[];
+    // this.getMasters().subscribe(masters => masters = masters);
+    // return masters.filter(master => master.id === masterId)[0].name;
+    return '';
   }
 
   public addMaster(name: string) {
-    this.masters.push( 
-      { id: Math.floor(Math.random() * 100), name: name, workingDays: [] } );
+    // return this.http.httpPut(this.mastersUrl, {name: name});
+    // this.masters.push( 
+    //   { id: Math.floor(Math.random() * 100), name: name, workingDays: [] } );
   }
 
   public updateMaster(masterId: number, days: number[]) {
-    let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
-    // TODO: db
-    this.masters[masterIndex].workingDays = days;
+    // let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
+    // // TODO: db
+    // this.masters[masterIndex].workingDays = days;
   }
 
   public deleteMaster(masterId: number) {
-    let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
-    // TODO: db
-    this.masters.splice(masterIndex, 1);
+    // let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
+    // // TODO: db
+    // this.masters.splice(masterIndex, 1);
   }
 
 }
