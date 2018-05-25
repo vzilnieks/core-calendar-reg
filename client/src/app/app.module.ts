@@ -10,6 +10,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { AuthService } from './auth.service';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './user.service';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     AuthService,
-    HttpService
+    HttpService,
+    UserService
   ],
   entryComponents: [ModalComponent],
   bootstrap: [AppComponent]

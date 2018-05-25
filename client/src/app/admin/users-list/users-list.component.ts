@@ -3,7 +3,6 @@ import { User } from '../../shared/classes/user';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../user.service';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-users-list',
@@ -54,9 +53,7 @@ export class UsersListComponent implements OnInit {
 
   private getUsers(): User[] {
     let userArray: User[] = [];
-    this.userService.getUser().subscribe(user => {
-      userArray.push(user);
-    });
+    this.userService.getUser().subscribe(user => userArray.push(user));
     return userArray;
   }
 

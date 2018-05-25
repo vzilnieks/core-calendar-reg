@@ -32,13 +32,12 @@ export class MastersListComponent implements OnInit {
   }
 
   private refreshTable(): void {
-    this.masters = this.getMasters();
+    this.getMasters();
     this.dataSource = this.masters;
   }
 
-  private getMasters(): Master[] {
-    this.masterService.getMasters().subscribe(masters => this.masters = masters);
-    return this.masters;
+  private getMasters() {
+    return this.masterService.getMasters().subscribe(master => this.masters.push());
   }
 
   private onUpdate(masterId: number) {

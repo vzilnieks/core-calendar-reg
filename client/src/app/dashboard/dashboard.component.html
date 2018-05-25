@@ -28,7 +28,7 @@
 					<form [formGroup]="masterForm[day]">
 						<mat-radio-group class="day-card masters-group" formControlName="master">
 							<mat-radio-button 
-									*ngFor="let master of getMasters(i); let im = index" 
+									*ngFor="let master of getWorkingMasters(i); let im = index" 
 									color="primary"    
 									[value]="master.id">
 								{{ master.name }}

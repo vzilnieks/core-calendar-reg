@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalComponent } from '../shared/components/modal/modal.component';
 import { Master } from '../shared/classes/master';
 import { MasterService } from '../master.service';
 import { AuthComponent } from '../auth/auth.component';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
+  private $masters: Subscription;
   private weekDays: string[] = 
       [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private workHours = [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
@@ -28,16 +30,14 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private getMasters(dayN: number): Master[] {
-    let workingMasters: Master[] = [];
+  ngOnDestroy() {
+    this.$masters.unsubscribe();
+  }
+
+  private getWorkingMasters(dayN: number): Master[] {
     let masters: Master[] = [];
-    this.masterService.getMasters().subscribe(masters => masters = masters);
-    masters.forEach(master => {
-      master.workingDays
-          .filter(workDay => workDay === dayN)
-          .forEach(() => workingMasters.push(master))
-    });
-    return workingMasters;
+    this.$masters = this.masterService.getMasters().filter(master => master.workingDays.includes(dayN)).subscribe(masters => masters = masters);
+    return masters;
   }
 
   private openDialog(dayN: number, time: number) {

@@ -3,23 +3,19 @@ import { Master } from './shared/classes/master';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from './http.service';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
 
 @Injectable()
 export class MasterService {
 
-  private mastersUrl: string = 'https://5b01889d642cef0014b09278.mockapi.io/core-reg/masters';
-
   constructor(private http: HttpService) { }
 
-  public getMasters(): Observable<any> {
-    return this.http.httpGet(this.mastersUrl).do(data => console.log(data));
+  public getMasters() {
+    return this.http.httpGet('masters');
   }
 
-  public getMasterName(masterId: number): string {
-    // let masters: Master[];
-    // this.getMasters().subscribe(masters => masters = masters);
-    // return masters.filter(master => master.id === masterId)[0].name;
-    return '';
+  public getMasterName(masterId: number) {
+    return this.http.httpGet('masters').filter(master => master.id === masterId);
   }
 
   public addMaster(name: string) {

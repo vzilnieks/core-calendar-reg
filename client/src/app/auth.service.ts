@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   public validateUser(userData: any): boolean {
-    this.userService.getUser(userData.username);
+    // this.userService.getUser().filter(user => user.).subscribe(user => );
     let userSaved = JSON.parse(localStorage.getItem('user'));
     if (userSaved.username === userData.username && 
 	      userSaved.password === userData.password) {

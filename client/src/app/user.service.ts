@@ -6,17 +6,14 @@ import { HttpService } from './http.service';
 
 @Injectable()
 export class UserService {
-  private url: string = "https://5b01889d642cef0014b09278.mockapi.io/core-reg/users";
 
   private roles: string[] = [ 'user', 'admin' ];
   private users: User[] = [];
-    // {id: 1, username: 'john', password: '', name: 'John Smith', phone: '', role_id: [ 0 ] },
-    // {id: 2, username: 'admin', password: '', name: 'Admin', phone: '', role_id: [ 0, 1 ] }
 
   constructor(private http: HttpService) { }
 
-  public getUser(username: string): Observable<User> {
-    return this.http.httpGet(this.url).subscribe(users => this.users = users);
+  public getUser() {
+    return this.http.httpGet('users');
     // return Observable.from(this.users);
   }
 
