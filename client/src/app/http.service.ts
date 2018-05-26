@@ -13,8 +13,15 @@ export class HttpService {
     return this.http.get(`${this.host}/${route}`);
   }
 
-  // public httpPut(url: string, data: any):Observable<any> {
-  //   return this.http.put(url, data);
-  // }
+  public httpPost(route: string, data: any): Observable<any> {
+    return this.http.post(`${this.host}/${route}`, data);
+  }
 
+  public httpPut(route: string, data: any): Observable<any> {
+    return this.http.put(`${this.host}/${route}`, data);
+  }
+
+  public httpDelete(route: string, data?: any): Observable<any> {
+    return this.http.delete(`${this.host}/${route}`, data);
+  }
 }

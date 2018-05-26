@@ -7,14 +7,13 @@ import { HttpService } from './http.service';
 @Injectable()
 export class UserService {
 
-  private roles: string[] = [ 'user', 'admin' ];
+  private roles: string[] = [ 'admin', 'user' ];
   private users: User[] = [];
 
   constructor(private http: HttpService) { }
 
-  public getUser() {
+  public getUsers() {
     return this.http.httpGet('users');
-    // return Observable.from(this.users);
   }
 
   public getRole(): Observable<string> {
@@ -22,26 +21,25 @@ export class UserService {
   }
 
   public addUser(username: string, password: string, user: string, phone: string) {
-    // TODO: check exists, db
-    this.users.push({ 
-      id: Math.floor(Math.random() * 100), 
-      username: username, 
-      name: user, 
-      password: password, 
-      phone: phone, 
-      role_id: [0] 
+    return this.http.httpPost('users', {
+      username: username,
+      password: password,
+      user: user,
+      phone: phone,
+      role_id: [1]
     });
   }
 
-  public updateUser(username: string, roles: number[]) {
-    let userIndex = this.users.findIndex(arr => arr.username === username);
+  public updateUser(userId: number, roles: number[]) {
+    // let userIndex = this.users.findIndex(arr => arr.username === username);
     // TODO: db
-    this.users[userIndex].role_id = roles;
+    // this.users[userIndex].role_id = roles;
+    return this.http.httpPut(`users/${userId}`, {roles: roles});
   }
 
-  public deleteUser(username: string) {
-    let userIndex = this.users.findIndex(arr => arr.username === username);
-    // TODO: db
-    this.users.splice(userIndex, 1);
+  public deleteUser(userId: number) {
+    return this.http.httpDelete(`users/${userId}`);
+    // let userIndex = this.users.findIndex(arr => arr.username === username);
+    // this.users.splice(userIndex, 1);
   }
 }

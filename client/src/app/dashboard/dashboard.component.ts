@@ -15,6 +15,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class DashboardComponent implements OnInit, OnDestroy {
 
   private $masters: Subscription;
+  private allMasters: Master[] = [];
+  private workingMasters: Array<Master[]> = [[]];
   private weekDays: string[] = 
       [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private workHours = [ 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
@@ -23,33 +25,39 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog, private masterService: MasterService) { }
 
   ngOnInit() {
-    let mastersOfDay: Master[] = [];
-    this.weekDays.forEach((day, dayN) => {
+    this.weekDays.forEach(day => {
       this.masterForm[day] = new FormGroup({});
       this.masterForm[day].addControl("master", new FormControl(''));
     });
+    this.$masters = this.masterService.getMasters()
+        .subscribe(
+          masters => {this.allMasters = masters}, 
+          error => {},
+          () => {
+            this.weekDays.forEach((day, dayN) => {
+              this.workingMasters.push(new Array);
+              this.workingMasters[dayN] = 
+                  this.allMasters.filter(master => master.workingDays.includes(dayN));
+          });
+        });
   }
 
   ngOnDestroy() {
     this.$masters.unsubscribe();
   }
 
-  private getWorkingMasters(dayN: number): Master[] {
-    let masters: Master[] = [];
-    this.$masters = this.masterService.getMasters().filter(master => master.workingDays.includes(dayN)).subscribe(masters => masters = masters);
-    return masters;
-  }
-
   private openDialog(dayN: number, time: number) {
     let day = this.weekDays[dayN];
     let choosedMaster: number = this.masterForm[day].get("master").value;
+    let choosedMasterName: string;
+    choosedMasterName = this.allMasters.filter(master => master.id === choosedMaster)[0].name;
     if (choosedMaster) {
       this.dialog.open( ModalComponent, {
         data: {
           alert: 
 `
 Order to day: ${day}, time: ${this.workHours[time]},
-Master: ${this.masterService.getMasterName(choosedMaster)}
+Master: ${choosedMasterName}
 ` 
         }
       });

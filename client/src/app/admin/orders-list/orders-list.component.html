@@ -10,7 +10,7 @@
     </ng-container>
     <ng-container matColumnDef="master">
       <mat-header-cell *matHeaderCellDef>Master</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ getMasterName(element.master_id) }}</mat-cell>
+      <mat-cell *matCellDef="let element">{{ getMasterName(element.master_id) }} {{element.master_id}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="phone">
       <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
