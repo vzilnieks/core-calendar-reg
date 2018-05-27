@@ -13,26 +13,25 @@
     </ng-container>
     <ng-container matColumnDef="workingDays">
       <mat-header-cell *matHeaderCellDef>Working Days</mat-header-cell>
-      <mat-cell *matCellDef="let element">
+      <mat-cell *matCellDef="let master">
         <form [formGroup]="workDayForm">
-          <mat-checkbox 
-              *ngFor="let day of weekDays; let i = index;" 
-              [attr.checked]="element.workingDays.includes(i) ? 'checked' : null"
-              color="primary" 
+          <mat-checkbox
+              *ngFor="let day of weekDays; let i = index;"
+              [checked]="master.workingDays.includes(i)"
               [formControlName]="day">
             {{ day }}
-            {{ element.workingDays.includes(i) }}
+            {{ master.workingDays.includes(i) }}
           </mat-checkbox>
           <button 
               color="primary" 
               mat-raised-button 
-              (click)="onUpdate(element.id)">
+              (click)="onUpdate(master.id)">
             Update
           </button>
           <button 
               color="primary" 
               mat-raised-button 
-              (click)="onDelete(element.id)">
+              (click)="onDelete(master.id)">
             Delete
           </button>
         </form>

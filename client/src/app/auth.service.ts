@@ -29,6 +29,9 @@ export class AuthService {
     //             user.password === userData.password));
       // this.loggedIn = true; 
       // return this.loggedIn;
+    if (!this.userSaved()) {
+      this.saveUserData(userData.username, userData.password);
+    };
     this.loggedIn = true;
     return this.loggedIn;
   }
