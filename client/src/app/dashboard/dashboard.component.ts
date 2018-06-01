@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  private $masters: Subscription;
+  private masters$: Subscription;
   private allMasters: Master[] = [];
   private workingMasters: Array<Master[]> = [[]];
   private weekDays: string[] = 
@@ -29,9 +29,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.masterForm[day] = new FormGroup({});
       this.masterForm[day].addControl("master", new FormControl(''));
     });
-    this.$masters = this.masterService.getMasters()
+    this.masters$ = this.masterService.getMasters()
         .subscribe(
-          masters => {this.allMasters = masters}, 
+          masters => this.allMasters = masters, 
           error => {},
           () => {
             this.weekDays.forEach((day, dayN) => {
@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.$masters.unsubscribe();
+    this.masters$.unsubscribe();
   }
 
   private openDialog(dayN: number, time: number) {
