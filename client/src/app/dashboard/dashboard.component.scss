@@ -5,6 +5,10 @@
   align-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
+
+  .menu-item {
+    padding: 10px;
+  }
 }
 
 .week-container {

@@ -15,7 +15,7 @@ import { MatCheckboxChange } from '@angular/material';
 })
 export class MastersListComponent implements OnInit, OnDestroy {
 
-  $masters: Subscription;
+  masters$: Subscription;
   private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private masters: Master[] = [];
 
@@ -34,15 +34,15 @@ export class MastersListComponent implements OnInit, OnDestroy {
       this.workDayForm.addControl(day, new FormControl(''));
       // this.workDayForm.controls.day.setValue(true);
     });
-    this.$masters = this.masterService.getMasters().subscribe();
+    this.masters$ = this.masterService.getMasters().subscribe();
   }
 
   ngOnDestroy() {
-    this.$masters.unsubscribe();
+    this.masters$.unsubscribe();
   }
 
   private addMaster() {
-    this.$masters = this.masterService.addMaster(this.masterForm.controls.masterInput.value)
+    this.masters$ = this.masterService.addMaster(this.masterForm.controls.masterInput.value)
         .subscribe(
             data => console.log(data),
             (err: HttpErrorResponse) => console.log(err),
@@ -57,7 +57,7 @@ export class MastersListComponent implements OnInit, OnDestroy {
         daysArray.push(index);
       };
     });
-    this.$masters = this.masterService.updateMaster(masterId, daysArray)
+    this.masters$ = this.masterService.updateMaster(masterId, daysArray)
         .subscribe(
             data => console.log(data),
             (err: HttpErrorResponse) => console.log(err),
@@ -66,7 +66,7 @@ export class MastersListComponent implements OnInit, OnDestroy {
   }
 
   private onDelete(masterId: number) {
-    this.$masters = this.masterService.deleteMaster(masterId)
+    this.masters$ = this.masterService.deleteMaster(masterId)
         .subscribe(
             data => console.log(data),
             (err: HttpErrorResponse) => console.log(err),

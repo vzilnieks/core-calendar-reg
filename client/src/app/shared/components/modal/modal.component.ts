@@ -3,7 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderService } from './../../../order.service';
  
 // TODO: MatDialog -> MatModule ?
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+// import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

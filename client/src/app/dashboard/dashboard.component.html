@@ -1,16 +1,19 @@
 <div class="menu-container">
   <div class="menu-item">
+    <app-dashboard-slider></app-dashboard-slider>
+  </div>
+  <div class="menu-item">
     <app-dashboard-filter></app-dashboard-filter>
   </div>
   <div class="menu-item">
     <mat-accordion>
       <mat-expansion-panel>
-	<mat-expansion-panel-header>
-	  <mat-panel-title>
-	    Login to control you orders
-	  </mat-panel-title>
-	</mat-expansion-panel-header>
-	<app-auth></app-auth>
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						Login to control you orders
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+				<app-auth></app-auth>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
@@ -19,9 +22,7 @@
   <div class="week-item" *ngFor="let day of weekDays; let i = index">
     <mat-card class="mat-elevation-z8 day-card">
       <mat-card-header>
-				<mat-card-title class="day-title">
-					{{ day }}
-				</mat-card-title>
+				<mat-card-title class="day-title">{{ day }}</mat-card-title>
       </mat-card-header>
       <mat-list role="list">
 				<mat-list-item role="listitem">
@@ -44,7 +45,7 @@
 					<button 
 							class="orders-line" 
 							color="primary" 
-							[disabled]="false"
+							[disabled]="orderPlaced(hourId)"
 							(click)="openDialog(i,hourId)"
 							mat-button>
 						{{hour}}:00 {{ (true) ? "Order" : "" }}

@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class OrdersListComponent implements OnInit, OnDestroy {
 
-  private $masters: Subscription;
+  private masters$: Subscription;
   private masters: Master[] = [];
   private displayedColumns = [ 'name', 'phone', 'date', 'master', 'customer_id' ];
   private dataSource = this.orderService.getOrders();
@@ -21,12 +21,12 @@ export class OrdersListComponent implements OnInit, OnDestroy {
   constructor(private masterService: MasterService, private orderService: OrderService) { }
 
   ngOnInit() {
-    this.$masters = this.masterService.getMasters()
+    this.masters$ = this.masterService.getMasters()
         .subscribe(masters => this.masters = masters);
   }
 
   ngOnDestroy() {
-    this.$masters.unsubscribe();
+    this.masters$.unsubscribe();
   }
 
   private getMasterName(masterId: number): string {
@@ -35,6 +35,12 @@ export class OrdersListComponent implements OnInit, OnDestroy {
     let master = this.masters.filter(master => master.id == masterId);
     if (!master[0]) return 'unknown';
     return master[0].name;
+  }
+
+  private showDate(mockDate: any): string {
+    const date = new Date();
+    date.setTime(mockDate); 
+    return date.toDateString();
   }
 
 }
