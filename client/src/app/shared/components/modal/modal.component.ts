@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ModalComponent implements OnInit, OnDestroy {
 
-  private $orders: Subscription;
+  private orders$: Subscription;
 
   public modalForm: FormGroup = new FormGroup({
     "phone": new FormControl('', [ Validators.required ])
@@ -30,11 +30,11 @@ export class ModalComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.$orders = this.orderService.getOrders().subscribe();
+    this.orders$ = this.orderService.getOrders().subscribe();
   }
 
   ngOnDestroy() {
-    this.$orders.unsubscribe();
+    this.orders$.unsubscribe();
   }
 
   private closeDialog() {
@@ -42,7 +42,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   private makeOrder() {
-    this.$orders = this.orderService.addOrder(this.modalForm.controls.phone.value)
+    this.orders$ = this.orderService.addOrder(this.modalForm.controls.phone.value)
         .subscribe(() => this.closeDialog());
   }
 

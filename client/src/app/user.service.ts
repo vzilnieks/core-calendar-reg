@@ -31,15 +31,10 @@ export class UserService {
   }
 
   public updateUser(userId: number, roles: number[]) {
-    // let userIndex = this.users.findIndex(arr => arr.username === username);
-    // TODO: db
-    // this.users[userIndex].role_id = roles;
     return this.http.httpPut(`users/${userId}`, {roles: roles});
   }
 
   public deleteUser(userId: number) {
     return this.http.httpDelete(`users/${userId}`);
-    // let userIndex = this.users.findIndex(arr => arr.username === username);
-    // this.users.splice(userIndex, 1);
   }
 }

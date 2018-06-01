@@ -17,14 +17,6 @@ export class OrderService {
     return this.http.httpPost('orders', {
       phone: phone
     });
-    // this.orders.push({
-    //   id: Math.floor(Math.random() * 100),
-    //   name: '',
-    //   phone: phone,
-    //   master_id: 0,
-    //   date: new Date(),
-    //   state: true
-    // });
   }
 
 }

@@ -9,8 +9,7 @@ export class AuthService {
   constructor(private userService: UserService) { }
 
   private userSaved(): boolean {
-    if (!localStorage.getItem('user')) return false;
-    return true;
+    return !localStorage.getItem('user');
   }
 
   private saveUserData(username: string, password: string): void {

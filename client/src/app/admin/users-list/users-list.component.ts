@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class UsersListComponent implements OnInit, OnDestroy {
 
   private roles: string[] = [];
-  private $users: Subscription;
+  private users$: Subscription;
   private displayedColumns = [ 'username', 'name', 'role_id' ];
   private dataSource = this.userService.getUsers();
   private userForm: FormGroup = new FormGroup({
@@ -28,7 +28,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.$users = this.userService.getUsers().subscribe();
+    this.users$ = this.userService.getUsers().subscribe();
     this.userService.getRole().subscribe(role => {
       this.roles.push(role);
     });
@@ -38,11 +38,11 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.$users.unsubscribe();
+    this.users$.unsubscribe();
   }
 
   private addUser() {
-    this.$users = this.userService.addUser(
+    this.users$ = this.userService.addUser(
         this.userForm.controls.usernameInput.value,
         this.userForm.controls.passwordInput.value,
         this.userForm.controls.nameInput.value,
@@ -61,7 +61,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
         rolesArray.push(index);
       };
     });
-    this.$users = this.userService.updateUser(userId, rolesArray)
+    this.users$ = this.userService.updateUser(userId, rolesArray)
         .subscribe(
             data => console.log(data),
             (err: HttpErrorResponse) => console.log(err),
