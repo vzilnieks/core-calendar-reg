@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-slider',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-slider.component.scss']
 })
 export class DashboardSliderComponent implements OnInit {
+
+  @Output() slide = new EventEmitter();
 
   private today: Date;
   private currentWeekDate1: string;
@@ -16,6 +18,10 @@ export class DashboardSliderComponent implements OnInit {
   ngOnInit() {
     this.today = new Date();
     this.weekSet();
+  }
+
+  private onSlide(currentWeekMonday: Date) {
+    this.slide.emit(currentWeekMonday);
   }
 
   private weekSet(): void {
@@ -29,6 +35,7 @@ export class DashboardSliderComponent implements OnInit {
     );
     this.currentWeekDate1 = firstDay.toDateString();
     this.currentWeekDate2 = lastDay.toDateString();
+    this.onSlide(firstDay);
   }
 
   private prevWeek(): void {

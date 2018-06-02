@@ -11,6 +11,7 @@ import { HttpService } from '../http.service';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';
 import { DashboardSliderComponent } from './dashboard-slider/dashboard-slider.component';
+import { DashboardDaysComponent } from './dashboard-days/dashboard-days.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { DashboardSliderComponent } from './dashboard-slider/dashboard-slider.co
   ],
   declarations: [
     DashboardComponent, 
-    DashboardFilterComponent, DashboardSliderComponent,
+    DashboardFilterComponent, DashboardSliderComponent, DashboardDaysComponent,
   ],
   providers: [
     MasterService, 

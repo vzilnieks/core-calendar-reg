@@ -8,6 +8,10 @@
       <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ showDate(element.date) }}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.hour }}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="master">
       <mat-header-cell *matHeaderCellDef>Master</mat-header-cell>
       <mat-cell *matCellDef="let element">{{ getMasterName(element.master_id) }}</mat-cell>

@@ -1,0 +1,39 @@
+<div class="week-container">
+  <div class="week-item" *ngFor="let day of weekDays; let i = index">
+    <mat-card class="mat-elevation-z8 day-card">
+      <mat-card-header>
+        <mat-card-title class="day-title">{{ day }}</mat-card-title>
+        <mat-card-subtitle>{{ getCardDate(i) }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <form [formGroup]="masterForm[day]">
+            <mat-radio-group class="day-card masters-group" formControlName="master">
+              <mat-radio-button 
+                  *ngFor="let master of getMastersByDay(i); let im = index" 
+                  color="primary"    
+                  [value]="master.id">
+                {{ master.name }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </form>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item 
+            role="listitem" 
+            class="day-card time-line" 
+            *ngFor="let hour of workHours; let hourId = index">
+          <button 
+              class="orders-line" 
+              color="primary" 
+              [disabled]="!orderPlaced(i, hour)"
+              (click)="openDialog(i, hourId)"
+              mat-button>
+            {{hour}}:00 {{ (true) ? "Order" : "" }}
+            {{orderPlaced(i, hour)}}
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+</div>

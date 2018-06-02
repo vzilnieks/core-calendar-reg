@@ -15,7 +15,9 @@ export class OrderService {
 
   public addOrder(phone: string) {
     return this.http.httpPost('orders', {
-      phone: phone
+      phone: phone,
+      date: new Date().getTime(),
+      hour: 12
     });
   }
 
