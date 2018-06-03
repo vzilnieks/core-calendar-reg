@@ -23,7 +23,9 @@ import { DashboardDaysComponent } from './dashboard-days/dashboard-days.componen
   ],
   declarations: [
     DashboardComponent, 
-    DashboardFilterComponent, DashboardSliderComponent, DashboardDaysComponent,
+    DashboardFilterComponent, 
+    DashboardSliderComponent, 
+    DashboardDaysComponent,
   ],
   providers: [
     MasterService, 

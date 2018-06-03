@@ -30,7 +30,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatListModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   exports: [
     MatCardModule,
@@ -44,7 +44,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatListModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   declarations: []
 })
