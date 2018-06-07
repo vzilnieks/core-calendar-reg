@@ -4,9 +4,8 @@ import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MasterService } from '../../master.service';
 import { Subscription } from 'rxjs/Subscription';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { MatCheckboxChange } from '@angular/material';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-masters-list',
@@ -32,7 +31,6 @@ export class MastersListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.weekDays.forEach(day => {
       this.workDayForm.addControl(day, new FormControl(''));
-      // this.workDayForm.controls.day.setValue(true);
     });
     this.masters$ = this.masterService.getMasters().subscribe();
   }
@@ -43,11 +41,8 @@ export class MastersListComponent implements OnInit, OnDestroy {
 
   private addMaster() {
     this.masters$ = this.masterService.addMaster(this.masterForm.controls.masterInput.value)
-        .subscribe(
-            data => console.log(data),
-            (err: HttpErrorResponse) => console.log(err),
-            () => this.dataSource = this.masterService.getMasters()
-        );
+        .finally(() => this.dataSource = this.masterService.getMasters())
+        .subscribe();
   }
 
   private onUpdate(masterId: number) {
@@ -58,20 +53,14 @@ export class MastersListComponent implements OnInit, OnDestroy {
       };
     });
     this.masters$ = this.masterService.updateMaster(masterId, daysArray)
-        .subscribe(
-            data => console.log(data),
-            (err: HttpErrorResponse) => console.log(err),
-            () => this.dataSource = this.masterService.getMasters()
-        );
+        .finally(() => this.dataSource = this.masterService.getMasters())
+        .subscribe();
   }
 
   private onDelete(masterId: number) {
     this.masters$ = this.masterService.deleteMaster(masterId)
-        .subscribe(
-            data => console.log(data),
-            (err: HttpErrorResponse) => console.log(err),
-            () => this.dataSource = this.masterService.getMasters()
-        );
+        .finally(() => this.dataSource = this.masterService.getMasters())
+        .subscribe();
   }
 
 }

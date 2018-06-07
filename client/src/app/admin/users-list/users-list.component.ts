@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../user.service';
 import { Subscription } from 'rxjs/Subscription';
-import { HttpErrorResponse } from '@angular/common/http';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-users-list',
@@ -47,11 +47,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
         this.userForm.controls.passwordInput.value,
         this.userForm.controls.nameInput.value,
         this.userForm.controls.phoneInput.value
-      ).subscribe(
-            data => console.log(data),
-            (err: HttpErrorResponse) => console.log(err),
-            () => this.dataSource = this.userService.getUsers()
-        );
+      )
+      .finally(() => this.dataSource = this.userService.getUsers())
+      .subscribe();
   }
 
   private onUpdate(userId: number) {
@@ -62,20 +60,14 @@ export class UsersListComponent implements OnInit, OnDestroy {
       };
     });
     this.users$ = this.userService.updateUser(userId, rolesArray)
-        .subscribe(
-            data => console.log(data),
-            (err: HttpErrorResponse) => console.log(err),
-            () => this.dataSource = this.userService.getUsers()
-        );
+        .finally(() => this.dataSource = this.userService.getUsers())
+        .subscribe();
   }
 
   private onDelete(userId: number) {
     this.userService.deleteUser(userId)
-        .subscribe(
-            data => console.log(data),
-            (err: HttpErrorResponse) => console.log(err),
-            () => this.dataSource = this.userService.getUsers()
-        );
+        .finally(() => this.dataSource = this.userService.getUsers())
+        .subscribe();
   }
 
 }
