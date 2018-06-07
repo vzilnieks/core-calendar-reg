@@ -8,6 +8,7 @@ import { MasterService } from '../../master.service';
 import { OrderService } from '../../order.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-dashboard-days',
@@ -49,10 +50,7 @@ export class DashboardDaysComponent implements OnInit, OnDestroy {
       });
     });
     this.orders$ = this.orderService.getOrders()
-        .subscribe(
-          orders => this.allOrders = orders,
-          (err) => console.log(err),
-          () => {
+        .finally(() => {
             this.allOrders.forEach(order => {
               order.dateCorrected = new Date(order.date);
             })
@@ -62,22 +60,19 @@ export class DashboardDaysComponent implements OnInit, OnDestroy {
                   order.dateCorrected.getDate() === unit.date.getDate() && 
                   order.hour === unit.date.getHours());
               if (foundOrders) unit.order = foundOrders;
-            });
-          });
+            });})
+        .subscribe(orders => this.allOrders = orders);
     this.masters$ = this.masterService.getMasters()
-        .subscribe(
-          masters => {this.allMasters = masters}, 
-          error => {},
-          () => {
-            console.log(this.allMasters);
-            console.log(this.orderUnits);
-            this.orderUnits.forEach(unit => {
-              const foundMasters = this.allMasters.filter(
+        .finally(() => {
+          console.log(this.allMasters);
+          console.log(this.orderUnits);
+          this.orderUnits.forEach(unit => {
+            const foundMasters = this.allMasters.filter(
                 master => unit.order.length && master.id === unit.order[0].master_id);
-              if (foundMasters.length) unit.master = foundMasters;
+            if (foundMasters.length) unit.master = foundMasters;
           });
-        });
-    console.log(this.orderUnits);
+        })
+        .subscribe(masters => this.allMasters = masters);
   }
 
   ngOnDestroy() {
