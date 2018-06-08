@@ -7,10 +7,6 @@
   flex-wrap: wrap;
 }
 
-.menu-item {
-  // margin: auto;
-  // padding: 5px;
-}
 .week-container {
   display: flex;
   flex-diretion: row;
@@ -18,15 +14,11 @@
   align-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
-}
 
-.week-item {
-  // margin: auto;
-  padding: 10px;
-}
-
-.week-grid {
-  max-width: 800px;
+  .week-item {
+    // margin: auto;
+    padding: 10px;
+  }
 }
 
 .day-card {

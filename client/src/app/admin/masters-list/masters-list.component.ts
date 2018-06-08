@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Master } from '../../shared/classes/master';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MasterService } from '../../master.service';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-masters-list',
   templateUrl: './masters-list.component.html',
   styleUrls: ['./masters-list.component.scss']
 })
-export class MastersListComponent implements OnInit {
+export class MastersListComponent implements OnInit, OnDestroy {
 
+  masters$: Subscription;
   private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private masters: Master[] = [];
 
@@ -19,7 +23,7 @@ export class MastersListComponent implements OnInit {
   });
   private workDayForm: FormGroup = new FormGroup({});
 
-  private dataSource: any;
+  private dataSource = this.masterService.getMasters();
   private displayedColumns = [ 'name', 'workingDays' ];
 
   constructor(private masterService: MasterService) { }
@@ -28,20 +32,17 @@ export class MastersListComponent implements OnInit {
     this.weekDays.forEach(day => {
       this.workDayForm.addControl(day, new FormControl(''));
     });
-    this.refreshTable();
+    this.masters$ = this.masterService.getMasters().subscribe();
   }
 
-  private refreshTable(): void {
-    this.masters = this.getMasters();
-    this.dataSource = this.masters;
+  ngOnDestroy() {
+    this.masters$.unsubscribe();
   }
 
-  private getMasters(): Master[] {
-    let mastersArray: Master[] = [];
-    this.masterService.getMaster().subscribe(master => {
-      mastersArray.push(master);
-    });
-    return mastersArray;
+  private addMaster() {
+    this.masters$ = this.masterService.addMaster(this.masterForm.controls.masterInput.value)
+        .finally(() => this.dataSource = this.masterService.getMasters())
+        .subscribe();
   }
 
   private onUpdate(masterId: number) {
@@ -51,19 +52,15 @@ export class MastersListComponent implements OnInit {
         daysArray.push(index);
       };
     });
-    this.masterService.updateMaster(masterId, daysArray);
-    this.refreshTable();
+    this.masters$ = this.masterService.updateMaster(masterId, daysArray)
+        .finally(() => this.dataSource = this.masterService.getMasters())
+        .subscribe();
   }
 
   private onDelete(masterId: number) {
-    this.masterService.deleteMaster(masterId);
-    this.refreshTable();
-  }
-
-
-  private addMaster() {
-    this.masterService.addMaster(this.masterForm.controls.masterInput.value);
-    this.refreshTable();
+    this.masters$ = this.masterService.deleteMaster(masterId)
+        .finally(() => this.dataSource = this.masterService.getMasters())
+        .subscribe();
   }
 
 }

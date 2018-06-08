@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UserService } from '../user.service';
+import { User } from '../shared/classes/user';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
 
   public loginForm: FormGroup = new FormGroup({
     username: new FormControl(),  
@@ -18,20 +20,25 @@ export class AuthComponent {
   private _loggedUser: string;
 
   public get loggedUser(): string {
-    this._loggedUser = this.authService.getCurrentUserName();
-    return this._loggedUser;
+    return this.authService.getCurrentUserName();
   }
 
   private _showLoggedIn: boolean;
 
   public get showLoggedIn(): boolean {
-    this._showLoggedIn = this.authService.loggedIn;
-    return this._showLoggedIn;
+    return this.authService.loggedIn;
   }
 
-  constructor(public router: Router, private authService: AuthService) { }
+  private users: User[] = [];
 
-  login() {
+  constructor(public router: Router, 
+      private authService: AuthService, private userService: UserService) { }
+
+  ngOnInit() {
+    // this.userService.getUser().subscribe(users => this.users = users);
+  }
+
+  public login() {
     if (this.authService.validateUser(this.loginForm.value)) {
       this._showLoggedIn = true;
       this.router.navigate(['/admin']);
@@ -40,7 +47,7 @@ export class AuthComponent {
     this.router.navigate(['']);
   }
 
-  logout() {
+  public logout() {
     this.authService.logout();
   }
 

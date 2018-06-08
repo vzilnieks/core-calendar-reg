@@ -8,6 +8,9 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { AuthService } from './auth.service';
+import { HttpService } from './http.service';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './user.service';
 
 @NgModule({
   imports: [
@@ -16,12 +19,17 @@ import { AuthService } from './auth.service';
     AppRoutingModule,
     CoreModule,
     SharedModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
     ModalComponent,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    HttpService,
+    UserService
+  ],
   entryComponents: [ModalComponent],
   bootstrap: [AppComponent]
 })

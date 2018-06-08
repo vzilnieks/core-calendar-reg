@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OrderService } from './../../../order.service';
  
 // TODO: MatDialog -> MatModule ?
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-modal',
@@ -11,7 +12,9 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
+
+  private orders$: Subscription;
 
   public modalForm: FormGroup = new FormGroup({
     "phone": new FormControl('', [ Validators.required ])
@@ -24,6 +27,11 @@ export class ModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.orders$ = this.orderService.getOrders().subscribe();
+  }
+
+  ngOnDestroy() {
+    this.orders$.unsubscribe();
   }
 
   private closeDialog() {
@@ -31,8 +39,8 @@ export class ModalComponent implements OnInit {
   }
 
   private makeOrder() {
-    this.orderService.addOrder(this.modalForm.controls.phone.value);
-    this.closeDialog();
+    this.orders$ = this.orderService.addOrder(this.modalForm.controls.phone.value)
+        .subscribe(() => this.closeDialog());
   }
 
 }

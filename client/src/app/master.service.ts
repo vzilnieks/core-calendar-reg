@@ -1,41 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Master } from './shared/classes/master';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class MasterService {
 
-  private masters: Master[] = [
-    {id: 1, name: "John Smith", workingDays: [1, 2]},
-    {id: 2, name: "Andrew Black", workingDays: [2, 3, 6]}
-  ];
+  constructor(private http: HttpService) { }
 
-  constructor() { }
-
-  public getMaster(): Observable<Master> {
-    return Observable.from(this.masters);
+  public getMasters() {
+    return this.http.httpGet('masters');
   }
 
-  public getMasterName(masterId: number): string {
-    return this.masters.filter(master => master.id === masterId)[0].name;
+  public getMasterById(masterId) {
+    return this.http.httpGet(`masters/${masterId}`);
   }
 
   public addMaster(name: string) {
-    this.masters.push( 
-      { id: Math.floor(Math.random() * 100), name: name, workingDays: [] } );
+    return this.http.httpPost('masters', {name: name});
   }
 
   public updateMaster(masterId: number, days: number[]) {
-    let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
-    // TODO: db
-    this.masters[masterIndex].workingDays = days;
+    return this.http.httpPut(`masters/${masterId}`, {workingDays: days});
   }
 
   public deleteMaster(masterId: number) {
-    let masterIndex = this.masters.findIndex(arr => arr.id === masterId);
-    // TODO: db
-    this.masters.splice(masterIndex, 1);
+    return this.http.httpDelete(`masters/${masterId}`);
   }
 
 }

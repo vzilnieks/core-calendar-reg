@@ -11,8 +11,7 @@ export class AppComponent implements OnInit {
   private _loggedIn: boolean = false;
 
   public get loggedIn(): boolean {
-    this._loggedIn = this.authService.loggedIn;
-    return this._loggedIn;
+    return this.authService.loggedIn;
   }
 
   constructor(private authService: AuthService) { }
