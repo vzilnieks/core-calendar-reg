@@ -13,11 +13,16 @@ export class OrderService {
     return this.http.httpGet('orders');
   }
 
-  public addOrder(phone: string) {
+  public addOrder(
+      phone: string, 
+      date: Date, 
+      time: number, 
+      masterId: number) {
     return this.http.httpPost('orders', {
       phone: phone,
-      date: new Date().getTime(),
-      hour: 12
+      date: date,
+      hour: time,
+      master_id: masterId
     });
   }
 

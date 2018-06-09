@@ -9,6 +9,7 @@ import { OrderService } from '../../order.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import 'rxjs/add/operator/finally';
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'app-dashboard-days',
@@ -106,11 +107,14 @@ export class DashboardDaysComponent implements OnInit, OnDestroy {
     if (choosedMaster) {
       this.dialog.open( ModalComponent, {
         data: {
-          alert: 
-`
-Order to day: ${day}, time: ${this.workHours[time]},
-Master: ${choosedMasterName}
-` 
+	  date: moment(this.currentWeekFirstDay).add(dayN, 'days').toDate(),
+	  time: this.workHours[time],
+	  masterId: choosedMaster,
+          alert: `
+	    Order to day:
+	    ${moment(this.currentWeekFirstDay).add(dayN, 'days').format('YYYY-MM-DD')} ${day}, 
+	    time: ${this.workHours[time]}:00,
+	    Master: ${choosedMasterName} ` 
         }
       });
     };
