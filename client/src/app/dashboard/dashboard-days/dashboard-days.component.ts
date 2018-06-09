@@ -98,7 +98,7 @@ export class DashboardDaysComponent implements OnInit, OnDestroy {
     return this.allMasters.filter(master => master.workingDays.includes(dayN));
   }
 
-  private openDialog(dayN: number, time: number) {
+  private openDialog(dayN: number, time: number, date: Date) {
     let day = this.weekDays[dayN];
     let choosedMaster: number = this.masterForm[day].get("master").value;
     let choosedMasterName: string;

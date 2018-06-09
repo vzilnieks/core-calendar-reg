@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard-slider',
@@ -25,28 +26,20 @@ export class DashboardSliderComponent implements OnInit {
   }
 
   private weekSet(): void {
-    let currentDate = new Date;
-    currentDate.setDate(this.today.getDate()); 
-    const firstDay = new Date(
-        currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1)
-    );
-    const lastDay = new Date(
-        currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 7)
-    );
-    this.currentWeekDate1 = firstDay.toDateString();
-    this.currentWeekDate2 = lastDay.toDateString();
-    this.onSlide(firstDay);
+    const firstDay = moment(this.today).weekday(1);
+    const lastDay = moment(this.today).weekday(7);
+    this.currentWeekDate1 = firstDay.format('YYYY-MM-DD').toString();
+    this.currentWeekDate2 = lastDay.format('YYYY-MM-DD').toString();
+    this.onSlide(firstDay.toDate());
   }
 
   private prevWeek(): void {
-    this.today.setDate(this.today.getDate() - 7);
-    // this.today.setTime(this.today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    this.today = moment(this.today).subtract(7, 'days').toDate();
     this.weekSet()
   }
 
   private nextWeek(): void {
-    this.today.setDate(this.today.getDate() + 7);
-    // this.today.setTime(this.today.getTime() + 7 * 24 * 60 * 60 * 1000);
+    this.today = moment(this.today).add(7, 'days').toDate();
     this.weekSet()
   }
 
