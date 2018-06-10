@@ -22,7 +22,9 @@ export class OrderService {
       phone: phone,
       date: date,
       hour: time,
-      master_id: masterId
+      master_id: masterId,
+      name: '',
+      customer_id: 0
     });
   }
 

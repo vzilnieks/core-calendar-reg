@@ -15,7 +15,7 @@ import 'rxjs/add/operator/finally';
 export class MastersListComponent implements OnInit, OnDestroy {
 
   masters$: Subscription;
-  private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+  private weekDays: string[] = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private masters: Master[] = [];
 
   private masterForm: FormGroup = new FormGroup({
