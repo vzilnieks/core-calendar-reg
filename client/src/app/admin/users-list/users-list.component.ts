@@ -46,8 +46,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
         this.userForm.controls.usernameInput.value,
         this.userForm.controls.passwordInput.value,
         this.userForm.controls.nameInput.value,
-        this.userForm.controls.phoneInput.value
-      )
+        this.userForm.controls.phoneInput.value)
       .finally(() => this.dataSource = this.userService.getUsers())
       .subscribe();
   }

@@ -15,7 +15,7 @@ export class OrdersListComponent implements OnInit, OnDestroy {
 
   private masters$: Subscription;
   private masters: Master[] = [];
-  private displayedColumns = [ 'name', 'phone', 'date', 'master', 'customer_id' ];
+  private displayedColumns = [ 'name', 'phone', 'date', 'time', 'master', 'customer_id' ];
   private dataSource = this.orderService.getOrders();
 
   constructor(private masterService: MasterService, private orderService: OrderService) { }
@@ -30,11 +30,14 @@ export class OrdersListComponent implements OnInit, OnDestroy {
   }
 
   private getMasterName(masterId: number): string {
-    // this.masterService.getMasterById(masterId)
-        // .subscribe(master => {return master.name;});
     let master = this.masters.filter(master => master.id == masterId);
     if (!master[0]) return 'unknown';
     return master[0].name;
+  }
+
+  private showDate(mockDate: number): string {
+    let date = new Date(mockDate);
+    return date.toDateString();
   }
 
 }

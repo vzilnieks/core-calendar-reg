@@ -1,56 +1,21 @@
 <div class="menu-container">
   <div class="menu-item">
+    <app-dashboard-slider (slide)="slide($event)"></app-dashboard-slider>
+  </div>
+  <div class="menu-item">
     <app-dashboard-filter></app-dashboard-filter>
   </div>
   <div class="menu-item">
     <mat-accordion>
       <mat-expansion-panel>
-	<mat-expansion-panel-header>
-	  <mat-panel-title>
-	    Login to control you orders
-	  </mat-panel-title>
-	</mat-expansion-panel-header>
-	<app-auth></app-auth>
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						Login to control you orders
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+				<app-auth></app-auth>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
 </div>
-<div class="week-container">
-  <div class="week-item" *ngFor="let day of weekDays; let i = index">
-    <mat-card class="mat-elevation-z8 day-card">
-      <mat-card-header>
-				<mat-card-title class="day-title">
-					{{ day }}
-				</mat-card-title>
-      </mat-card-header>
-      <mat-list role="list">
-				<mat-list-item role="listitem">
-					<form [formGroup]="masterForm[day]">
-						<mat-radio-group class="day-card masters-group" formControlName="master">
-							<mat-radio-button 
-									*ngFor="let master of workingMasters[i]; let im = index" 
-									color="primary"    
-									[value]="master.id">
-								{{ master.name }}
-							</mat-radio-button>
-						</mat-radio-group>
-					</form>
-				</mat-list-item>
-				<mat-divider></mat-divider>
-				<mat-list-item 
-						role="listitem" 
-						class="day-card time-line" 
-						*ngFor="let hour of workHours; let hourId = index">
-					<button 
-							class="orders-line" 
-							color="primary" 
-							[disabled]="false"
-							(click)="openDialog(i,hourId)"
-							mat-button>
-						{{hour}}:00 {{ (true) ? "Order" : "" }}
-					</button>
-				</mat-list-item>
-      </mat-list>
-    </mat-card>
-  </div>
-</div>
+<app-dashboard-days [currentWeekFirstDay]="currentWeekFirstDay"></app-dashboard-days>

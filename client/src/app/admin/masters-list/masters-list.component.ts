@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MasterService } from '../../master.service';
 import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { MatCheckboxChange } from '@angular/material';
 import 'rxjs/add/operator/finally';
 
 @Component({
@@ -15,7 +15,7 @@ import 'rxjs/add/operator/finally';
 export class MastersListComponent implements OnInit, OnDestroy {
 
   masters$: Subscription;
-  private weekDays: string[] = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+  private weekDays: string[] = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private masters: Master[] = [];
 
   private masterForm: FormGroup = new FormGroup({
