@@ -1,41 +1,40 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  public loggedIn: boolean;
+  private isLoggedSubject = new BehaviorSubject<boolean>(this.hasJToken());
 
   constructor(private userService: UserService) { }
 
-  private userSaved(): boolean {
-    return !localStorage.getItem('user');
+  public isLoggedIn(): Observable<boolean> {
+    return this.isLoggedSubject.asObservable();
   }
 
-  private saveUserData(username: string, password: string): void {
+  private hasJToken(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  public login(username: string): void {
+    // TODO: check remotely and get token
     let saveData = { 
       'username': username, 
-      'password': password 
+      'JWT': '...' 
     };
-    localStorage.setItem('user', JSON.stringify(saveData));
+    localStorage.setItem('token', JSON.stringify(saveData));
+    this.isLoggedSubject.next(true);
   }
 
-  public validateUser(userData: any): boolean {
-    if (!this.userSaved()) {
-      this.saveUserData(userData.username, userData.password);
-    };
-    this.loggedIn = true;
-    return this.loggedIn;
+  public logout(): void {
+    localStorage.removeItem('token');
+    this.isLoggedSubject.next(false);
   }
 
   public getCurrentUserName(): string {
-    if (!this.loggedIn) return null;
-    let userSaved = JSON.parse(localStorage.getItem('user'));
+    let userSaved = JSON.parse(localStorage.getItem('token'));
     return userSaved.username;
-  }
-  
-  public logout(): void {
-    this.loggedIn = false;
   }
 
 }
