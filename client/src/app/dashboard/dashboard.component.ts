@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit {
   private currentWeekFirstDay: Date;
   private currentWeekSide: string;
   private animationShow: boolean;
+  private itemSignal: Object;
 
   constructor() { }
 
@@ -17,14 +18,11 @@ export class DashboardComponent implements OnInit {
     this.currentWeekFirstDay = new Date();
     this.currentWeekSide = '';
     this.animationShow = true;
+    this.itemSignal = { value: 'void' };
   }
 
   private slideDate(date: Date) {
     this.currentWeekFirstDay = date;
-    this.animationShow = false;
-    setInterval(() => {
-      this.animationShow = true;
-    }, 10)
   }
 
   private slideSign(sign: string) {
@@ -33,6 +31,12 @@ export class DashboardComponent implements OnInit {
     setInterval(() => {
       this.animationShow = true;
     }, 10)
+    this.itemSignal = {
+      value: 'slide', 
+      params: { 
+        sign: this.currentWeekSide 
+      }
+    };
   }
 
 }

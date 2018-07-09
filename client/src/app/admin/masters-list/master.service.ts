@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Master } from './shared/classes/master';
-import { HttpService } from './http.service';
+import { Master } from '../../shared/classes/master';
+import { HttpService } from '../../core/http.service';
 
 @Injectable()
 export class MasterService {

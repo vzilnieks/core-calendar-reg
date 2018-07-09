@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { OrderService } from './../../../order.service';
+import { OrderService } from '../../../admin/orders-list/order.service';
 import 'rxjs/add/operator/finally';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';

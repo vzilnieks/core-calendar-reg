@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { AuthModule } from '../auth/auth.module';
-import { MasterService } from '../master.service';
-import { OrderService } from '../order.service';
-import { HttpService } from '../http.service';
+import { MasterService } from '../admin/masters-list/master.service';
+import { OrderService } from '../admin/orders-list/order.service';
+import { HttpService } from '../core/http.service';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardFilterComponent } from './dashboard-filter/dashboard-filter.component';

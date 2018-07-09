@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Order } from './shared/classes/order';
+import { Order } from '../../shared/classes/order';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
-import { HttpService } from './http.service';
+import { HttpService } from '../../core/http.service';
 
 @Injectable()
 export class OrderService {

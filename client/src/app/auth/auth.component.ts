@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
+import { AuthService } from './auth.service';
+import { UserService } from '../admin/users-list/user.service';
 import { User } from '../shared/classes/user';
 import { Observable } from 'rxjs';
 

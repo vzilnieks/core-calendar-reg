@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Master } from '../../shared/classes/master';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MasterService } from '../../master.service';
+import { MasterService } from './master.service';
 import { Subscription } from 'rxjs/Subscription';
 import { MatCheckboxChange } from '@angular/material';
 import 'rxjs/add/operator/finally';

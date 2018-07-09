@@ -4,7 +4,7 @@
     fxLayoutGap="20px" 
     *ngIf="show">
   <div 
-      [@items]="{value: ':enter', params: { sign: animationSide }}" 
+      [@items]="itemSignal"
       class="week-item" 
       *ngFor="let day of workDays">
     <mat-card class="mat-elevation-z8 day-card">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './user.service';
+import { UserService } from '../admin/users-list/user.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()

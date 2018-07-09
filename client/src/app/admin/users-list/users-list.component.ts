@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../shared/classes/user';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from '../../user.service';
+import { UserService } from './user.service';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/finally';
 

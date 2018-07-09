@@ -4,11 +4,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { Master } from '../../shared/classes/master';
 import { OrderUnit } from '../../shared/classes/order-unit';
 import { Order } from '../../shared/classes/order';
-import { MasterService } from '../../master.service';
-import { OrderService } from '../../order.service';
+import { MasterService } from '../../admin/masters-list/master.service';
+import { OrderService } from '../../admin/orders-list/order.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
-import { trigger, transition, style, animate } from "@angular/animations";
+import { trigger, transition, style, animate, keyframes, state } from "@angular/animations";
 import 'rxjs/add/operator/finally';
 import * as moment from 'moment';
 
@@ -18,26 +18,27 @@ import * as moment from 'moment';
   styleUrls: ['./dashboard-days.component.scss'],
   animations: [
     trigger('items', [
-      transition(':enter', [
-        style({ 
-          transform: 'translateX({{sign}}500px)', opacity: 0 
-        }),  // initial
+      state('void', style({
+        transform: 'translateY(-100px)', opacity: 1 
+      })),
+      state('slide', style({
+        transform: 'scale(1)', opacity: 1 
+      })),
+      transition('* => void', [
+        animate(1000) 
+      ]),
+      transition('* => slide', [
+        animate(1000, keyframes([
+          style({ transform: 'translateX({{sign}}1000px)' }),  
+          style({ transform: 'translateX({{sign}}90px)' }),  
+          style({ transform: 'translateX(0px)' }),  
+        ])),
         animate(
           '0.4s cubic-bezier(.8, -0.6, 0.26, 1.6)',
           style({ 
             transform: 'scale(1)', opacity: 1 
           }))  // final
       ], { params: { sign: '' } }),
-      transition('* => *', [
-        style({ 
-          transform: 'translateX(-100px)', opacity: 0 
-        }),  // initial
-        animate(
-          '0.7s cubic-bezier(.8, -0.6, 0.26, 1.6)',
-          style({ 
-            transform: 'scale(1)', opacity: 1 
-          }))  // final
-      ], { params: { sign: '' } })
     ])
   ]
 })
@@ -46,6 +47,7 @@ export class DashboardDaysComponent implements OnInit, OnDestroy, OnChanges {
   @Input() weekFirstDay: Date;
   @Input() animationSide: String;
   @Input() show: boolean;
+  @Input() itemSignal: Object;
 
   private masterForm: FormGroup[] = [];
   private allMasters: Master[] = [];
