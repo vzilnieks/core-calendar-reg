@@ -1,7 +1,10 @@
 a {
   text-decoration: none;
+  color: rgb(107, 107, 107);
+  padding: 12px;
 
   &.active {
     font-weight: bold;
+    color: rgb(255, 255, 255)
   }
 }

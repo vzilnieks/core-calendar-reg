@@ -16,11 +16,9 @@
       <mat-cell *matCellDef="let master">
         <form [formGroup]="workDayForm">
           <mat-checkbox
-              *ngFor="let day of weekDays; let i = index;"
-              [checked]="master.workingDays.includes(i)"
-              [formControlName]="day">
+              *ngFor="let day of weekDays; let i = index"
+              [checked]="master.workingDays.includes(i)">
             {{ day }}
-            {{ master.workingDays.includes(i) }}
           </mat-checkbox>
           <button 
               color="primary" 

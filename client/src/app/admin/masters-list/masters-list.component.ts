@@ -17,6 +17,7 @@ export class MastersListComponent implements OnInit, OnDestroy {
   masters$: Subscription;
   private weekDays: string[] = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
   private masters: Master[] = [];
+  dummyCheck: boolean = true;
 
   private masterForm: FormGroup = new FormGroup({
     masterInput: new FormControl('', [ Validators.required ])
