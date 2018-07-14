@@ -1,8 +1,8 @@
 <form [formGroup]="masterForm" (submit)="addMaster()">
-  <mat-input-container class="master-form">
+  <mat-form-field class="master-form">
     <mat-hint>New master</mat-hint>
     <input required placeholder="Name" matInput formControlName="masterInput">
-  </mat-input-container>
+  </mat-form-field>
   <button color="primary" mat-raised-button>Add</button>
 </form>
 <div class="masters-container">

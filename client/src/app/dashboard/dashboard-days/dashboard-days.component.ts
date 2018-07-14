@@ -9,7 +9,7 @@ import { OrderService } from '../../admin/orders-list/order.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { trigger, transition, style, animate, keyframes, state } from "@angular/animations";
-import 'rxjs/add/operator/finally';
+import { finalize } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
@@ -78,15 +78,15 @@ export class DashboardDaysComponent implements OnInit, OnDestroy, OnChanges {
       });
     });
     this.orders$ = this.orderService.getOrders()
-        .finally(() => { 
+        .pipe(finalize(() => { 
           // Strange Issue: mockapi date not converted to Date automatically
           this.allOrders.forEach(order => {
             order.dateCorrected = new Date(order.date); 
           });
           this.masters$ = this.masterService.getMasters()
-              .finally(() => this.refreshOrderUnits())
+              .pipe(finalize(() => this.refreshOrderUnits()))
               .subscribe(masters => this.allMasters = masters);
-        })
+        }))
         .subscribe(orders => this.allOrders = orders);
   }
 

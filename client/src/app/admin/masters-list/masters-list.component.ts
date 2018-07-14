@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MasterService } from './master.service';
 import { Subscription } from 'rxjs/Subscription';
 import { MatCheckboxChange } from '@angular/material';
-import 'rxjs/add/operator/finally';
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: 'app-masters-list',
@@ -42,7 +42,7 @@ export class MastersListComponent implements OnInit, OnDestroy {
 
   private addMaster() {
     this.masters$ = this.masterService.addMaster(this.masterForm.controls.masterInput.value)
-        .finally(() => this.dataSource = this.masterService.getMasters())
+        .pipe(finalize(() => this.dataSource = this.masterService.getMasters()))
         .subscribe();
   }
 
@@ -54,13 +54,13 @@ export class MastersListComponent implements OnInit, OnDestroy {
       };
     });
     this.masters$ = this.masterService.updateMaster(masterId, daysArray)
-        .finally(() => this.dataSource = this.masterService.getMasters())
+        .pipe(finalize(() => this.dataSource = this.masterService.getMasters()))
         .subscribe();
   }
 
   private onDelete(masterId: number) {
     this.masters$ = this.masterService.deleteMaster(masterId)
-        .finally(() => this.dataSource = this.masterService.getMasters())
+        .pipe(finalize(() => this.dataSource = this.masterService.getMasters()))
         .subscribe();
   }
 
