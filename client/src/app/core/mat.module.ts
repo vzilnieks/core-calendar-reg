@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // import { MatCardModule, MatGridListModule, MatButtonModule, MatListModule, MatTableModule, MatToolbarModule, MatInputModule, MatExpansionModule, MatDialogModule, MatCheckboxModule, MatSelectModule, MatRadioModule } from '@angular/material';
 
@@ -31,6 +32,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     MatSelectModule,
     MatRadioModule,
+    FlexLayoutModule,
   ],
   exports: [
     MatCardModule,
@@ -45,6 +47,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCheckboxModule,
     MatSelectModule,
     MatRadioModule,
+    FlexLayoutModule,
   ],
   declarations: []
 })

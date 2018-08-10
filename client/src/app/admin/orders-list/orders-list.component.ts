@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Master } from '../../shared/classes/master';
 import { Order } from '../../shared/classes/order';
 import { MatTableDataSource } from '@angular/material';
-import { MasterService } from '../../master.service';
-import { OrderService } from '../../order.service';
+import { MasterService } from '../masters-list/master.service';
+import { OrderService } from './order.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

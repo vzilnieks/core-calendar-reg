@@ -1,5 +1,12 @@
-<div class="week-container">
-  <div class="week-item" *ngFor="let day of workDays">
+<div 
+    fxLayout="row wrap" 
+    fxLayoutAlign="center start" 
+    fxLayoutGap="20px" 
+    *ngIf="show">
+  <div 
+      [@items]="itemSignal"
+      class="week-item" 
+      *ngFor="let day of workDays">
     <mat-card class="mat-elevation-z8 day-card">
       <mat-card-header>
         <mat-card-title class="day-title">{{ day }}</mat-card-title>

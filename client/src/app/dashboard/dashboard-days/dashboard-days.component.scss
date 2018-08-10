@@ -1,15 +1,5 @@
-.week-container {
-  display: flex;
-  flex-diretion: row;
-  justify-content: center;
-  align-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-
-  .week-item {
-    // margin: auto;
-    padding: 10px;
-  }
+.week-item {
+  margin-bottom: 10px;
 }
 
 .day-card {

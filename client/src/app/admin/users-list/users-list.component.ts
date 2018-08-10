@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../shared/classes/user';
 import { MatTableDataSource } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from '../../user.service';
+import { UserService } from './user.service';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/finally';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-users-list',
@@ -47,7 +47,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
         this.userForm.controls.passwordInput.value,
         this.userForm.controls.nameInput.value,
         this.userForm.controls.phoneInput.value)
-      .finally(() => this.dataSource = this.userService.getUsers())
+      .pipe(finalize(() => this.dataSource = this.userService.getUsers()))
       .subscribe();
   }
 
@@ -59,13 +59,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
       };
     });
     this.users$ = this.userService.updateUser(userId, rolesArray)
-        .finally(() => this.dataSource = this.userService.getUsers())
+        .pipe(finalize(() => this.dataSource = this.userService.getUsers()))
         .subscribe();
   }
 
   private onDelete(userId: number) {
     this.userService.deleteUser(userId)
-        .finally(() => this.dataSource = this.userService.getUsers())
+        .pipe(finalize(() => this.dataSource = this.userService.getUsers()))
         .subscribe();
   }
 

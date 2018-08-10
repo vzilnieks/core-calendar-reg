@@ -1,8 +1,8 @@
 <form [formGroup]="masterForm" (submit)="addMaster()">
-  <mat-input-container class="master-form">
+  <mat-form-field class="master-form">
     <mat-hint>New master</mat-hint>
     <input required placeholder="Name" matInput formControlName="masterInput">
-  </mat-input-container>
+  </mat-form-field>
   <button color="primary" mat-raised-button>Add</button>
 </form>
 <div class="masters-container">
@@ -16,11 +16,9 @@
       <mat-cell *matCellDef="let master">
         <form [formGroup]="workDayForm">
           <mat-checkbox
-              *ngFor="let day of weekDays; let i = index;"
-              [checked]="master.workingDays.includes(i)"
-              [formControlName]="day">
+              *ngFor="let day of weekDays; let i = index"
+              [checked]="master.workingDays.includes(i)">
             {{ day }}
-            {{ master.workingDays.includes(i) }}
           </mat-checkbox>
           <button 
               color="primary" 

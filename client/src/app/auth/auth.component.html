@@ -1,15 +1,30 @@
-<ng-container *ngIf="showLoggedIn; else elseBlock">
-  <p>Hello {{loggedUser}}!</p>
-  <button color="primary" mat-raised-button (submit)="logout()">Logout</button>
+<ng-container *ngIf="(isLoggedIn | async); else elseBlock">
+  <p>Hello {{ loggedUser() }}!</p>
+  <button 
+      color="primary" 
+      mat-raised-button 
+      (click)="logout()">
+    Logout
+  </button>
 </ng-container>
 <ng-template #elseBlock>
   <form [formGroup]="loginForm" (submit)="login()">
-    <mat-input-container class="auth-field">
-      <input required placeholder="Username" matInput formControlName="username">
-    </mat-input-container>
-    <mat-input-container class="auth-field">
-      <input class="auth-field" required type="password" placeholder="Password" matInput formControlName="password">
-    </mat-input-container>
+    <mat-form-field class="auth-field">
+      <input 
+          required 
+          placeholder="Username" 
+          matInput 
+          formControlName="username">
+    </mat-form-field>
+    <mat-form-field class="auth-field">
+      <input 
+          class="auth-field" 
+          required 
+          type="password" 
+          placeholder="Password" 
+          matInput 
+          formControlName="password">
+    </mat-form-field>
     <button color="primary" mat-raised-button>Login</button>
   </form>
 </ng-template>

@@ -1,6 +1,9 @@
-<div class="menu-container">
+<div fxLayout="row wrap" fxLayoutAlign="center center">
   <div class="menu-item">
-    <app-dashboard-slider (slide)="slide($event)"></app-dashboard-slider>
+    <app-dashboard-slider 
+        (weekDate)="slideDate($event)" 
+        (weekSign)="slideSign($event)">
+    </app-dashboard-slider>
   </div>
   <div class="menu-item">
     <app-dashboard-filter></app-dashboard-filter>
@@ -18,4 +21,9 @@
     </mat-accordion>
   </div>
 </div>
-<app-dashboard-days [currentWeekFirstDay]="currentWeekFirstDay"></app-dashboard-days>
+<app-dashboard-days 
+    [weekFirstDay]="currentWeekFirstDay"
+    [animationSide]="currentWeekSide"
+    [show]="animationShow"
+    [itemSignal]="itemSignal">
+</app-dashboard-days>

@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ModalComponent } from './shared/components/modal/modal.component';
-import { AuthService } from './auth.service';
-import { HttpService } from './http.service';
+import { AuthService } from './auth/auth.service';
+import { HttpService } from './core/http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from './user.service';
+import { UserService } from './admin/users-list/user.service';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import { UserService } from './user.service';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   declarations: [
     AppComponent,

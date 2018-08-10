@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { OrderService } from './../../../order.service';
-import 'rxjs/add/operator/finally';
+import { OrderService } from '../../../admin/orders-list/order.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-modal',
@@ -45,7 +44,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.data.date,
       this.data.time,
       this.data.masterId)
-	.finally(() => this.closeDialog())
+        .pipe(finalize(() => this.closeDialog()))
         .subscribe();
   }
 
