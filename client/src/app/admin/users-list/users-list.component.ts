@@ -17,7 +17,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   private users$: Subscription;
   private displayedColumns = [ 'username', 'name', 'role_id' ];
   private dataSource = this.userService.getUsers();
-  private userForm: FormGroup = new FormGroup({
+  userForm: FormGroup = new FormGroup({
     usernameInput: new FormControl('', [ Validators.required ]),
     passwordInput: new FormControl('', [ Validators.required ]),
     nameInput: new FormControl('', [ Validators.required ]),
@@ -42,13 +42,15 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   private addUser() {
-    this.users$ = this.userService.addUser(
-        this.userForm.controls.usernameInput.value,
-        this.userForm.controls.passwordInput.value,
-        this.userForm.controls.nameInput.value,
-        this.userForm.controls.phoneInput.value)
-      .pipe(finalize(() => this.dataSource = this.userService.getUsers()))
-      .subscribe();
+    if (this.userForm.valid) {
+      this.users$ = this.userService.addUser(
+          this.userForm.controls.usernameInput.value,
+          this.userForm.controls.passwordInput.value,
+          this.userForm.controls.nameInput.value,
+          this.userForm.controls.phoneInput.value)
+        .pipe(finalize(() => this.dataSource = this.userService.getUsers()))
+        .subscribe();
+    }
   }
 
   private onUpdate(userId: number) {

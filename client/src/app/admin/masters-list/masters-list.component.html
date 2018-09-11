@@ -1,7 +1,10 @@
 <form [formGroup]="masterForm" (submit)="addMaster()">
   <mat-form-field class="master-form">
     <mat-hint>New master</mat-hint>
-    <input required placeholder="Name" matInput formControlName="masterInput">
+    <input placeholder="Name" matInput formControlName="masterInput" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="masterForm.controls.masterInput.hasError('required')">
+      Please enter name
+    </mat-error>
   </mat-form-field>
   <button color="primary" mat-raised-button>Add</button>
 </form>

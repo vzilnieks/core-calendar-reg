@@ -1,12 +1,21 @@
 <form [formGroup]="userForm" (submit)="addUser()">
   <mat-form-field class="user-form">
     <input name="username" placeholder="Username" matInput formControlName="usernameInput">
+    <mat-error *ngIf="userForm.controls.usernameInput.hasError('required')">
+      Please enter username
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="user-form">
     <input name="password" placeholder="Password" type="password" matInput formControlName="passwordInput">
+    <mat-error *ngIf="userForm.controls.passwordInput.hasError('required')">
+      Please enter password
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="user-form">
     <input name="name" placeholder="Name" matInput formControlName="nameInput">
+    <mat-error *ngIf="userForm.controls.nameInput.hasError('required')">
+      Please enter name
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="user-form">
     <input name="phone" placeholder="Phone" matInput formControlName="phoneInput">

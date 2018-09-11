@@ -1,11 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Master } from '../../shared/classes/master';
-import { MatTableDataSource } from '@angular/material';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatTableDataSource, ErrorStateMatcher } from '@angular/material';
+import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { MasterService } from './master.service';
 import { Subscription } from 'rxjs/Subscription';
 import { MatCheckboxChange } from '@angular/material';
 import { finalize } from "rxjs/operators";
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-masters-list',
@@ -14,14 +22,15 @@ import { finalize } from "rxjs/operators";
 })
 export class MastersListComponent implements OnInit, OnDestroy {
 
+  private masters: Master[] = [];
   masters$: Subscription;
   private weekDays: string[] = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
-  private masters: Master[] = [];
-  dummyCheck: boolean = true;
+  dummyCheck = true;
 
-  private masterForm: FormGroup = new FormGroup({
+  masterForm: FormGroup = new FormGroup({
     masterInput: new FormControl('', [ Validators.required ])
   });
+  matcher = new MyErrorStateMatcher();
   private workDayForm: FormGroup = new FormGroup({});
 
   private dataSource = this.masterService.getMasters();
@@ -41,17 +50,19 @@ export class MastersListComponent implements OnInit, OnDestroy {
   }
 
   private addMaster() {
-    this.masters$ = this.masterService.addMaster(this.masterForm.controls.masterInput.value)
-        .pipe(finalize(() => this.dataSource = this.masterService.getMasters()))
-        .subscribe();
+    if (this.masterForm.valid) {
+      this.masters$ = this.masterService.addMaster(this.masterForm.controls.masterInput.value)
+          .pipe(finalize(() => this.dataSource = this.masterService.getMasters()))
+          .subscribe();
+    }
   }
 
   private onUpdate(masterId: number) {
-    let daysArray: number[] = [];
+    const daysArray: number[] = [];
     this.weekDays.forEach((day, index) => {
       if (this.workDayForm.get(day).value) {
         daysArray.push(index);
-      };
+      }
     });
     this.masters$ = this.masterService.updateMaster(masterId, daysArray)
         .pipe(finalize(() => this.dataSource = this.masterService.getMasters()))
